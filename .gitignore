@@ -4,3 +4,10 @@
 *.ipr
 *.iws
 out/
+
+# Python / Office
+__pycache__/
+~$*
+
+# macOS
+.DS_Store

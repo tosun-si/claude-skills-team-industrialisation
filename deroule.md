@@ -114,23 +114,34 @@ artefacts sont des *preuves*, pas le sujet. Climax = le **contraste sans/avec**.
 
 ### Note technique — la session « sans skills » pour le contraste
 
-**VÉRIFIÉ sur Claude Code v2.1.154** (via `claude --help`). Toggle **non
-destructif** — juste des flags, rien à restaurer après :
+**VÉRIFIÉ sur Claude Code v2.1.280** (test réel en `-p`, 23/09/2026). Toggle
+**non destructif** — juste des flags, rien à restaurer après :
 
 ```bash
-# SANS (baseline générique) : pas de CLAUDE.md (auto-discovery + auto-memory off), pas de skills
-claude --bare --disable-slash-commands
+# SANS (baseline générique) : ni CLAUDE.md, ni mémoire, ni skills (user, projet, plugins, built-in)
+claude --safe-mode --disable-slash-commands
 
-# AVEC (setup complet) : dans le dossier projet (CLAUDE.md présent) ; skills auto via ~/.claude/skills
+# AVEC : dans le projet de démo, après `skillmgr update`
 claude
 ```
 
-- `--bare` → « Minimal mode: skip hooks, LSP, plugin sync, attribution,
-  **auto-memory, and CLAUDE.md auto-discovery**. Skills still resolve via
-  /skill-name. »
-- `--disable-slash-commands` → « **Disable all skills** » (ceinture + bretelles
-  pour garantir zéro influence de skill dans le run « sans »).
-- `CLAUDE_CONFIG_DIR` : **absent du `--help`** → ne pas s'appuyer dessus.
-- ⚠️ **À répéter** : confirmer en répét' que `--bare --disable-slash-commands`
-  + un prompt normal donne bien la sortie générique, et que la version sur la
-  machine de démo se comporte pareil.
+Résultats mesurés (« liste tes skills » + « vois-tu un CLAUDE.md ? ») :
+
+| Flags | Skills visibles | CLAUDE.md |
+|---|---|---|
+| (aucun) | ~40 (perso + built-in + plugins) | oui |
+| `--safe-mode` | 13 built-in (`simplify`, `code-review`…) | non |
+| `--disable-slash-commands` | aucun | **oui** |
+| `--safe-mode --disable-slash-commands` | **aucun** | **non** ✅ |
+| `--bare --disable-slash-commands` | — | ❌ « Not logged in » |
+
+- ❌ **L'ancienne recette `--bare` ne marche plus avec un login Claude
+  (OAuth)** : `--bare` n'accepte que `ANTHROPIC_API_KEY` / `apiKeyHelper`.
+- `--safe-mode` coupe toutes les personnalisations (CLAUDE.md, skills,
+  plugins installés, hooks, MCP, agents…) mais garde l'auth et les built-in ;
+  `--disable-slash-commands` retire le reste des skills (built-in compris).
+- **Impossible de désactiver les skills dans une session déjà lancée** : leur
+  liste est injectée au démarrage. Pour le « sans », toujours une session neuve
+  (un 2ᵉ terminal).
+- ⚠️ **À répéter** : rejouer le tableau sur la machine de démo (version CLI
+  figée la veille).

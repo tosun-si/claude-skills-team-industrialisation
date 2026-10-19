@@ -1,0 +1,641 @@
+"""Slide-by-slide content — DevFest Toulouse (2 speakers, ~35 min + Q&A).
+
+« Industrialiser l'IA en équipe : des skills qui encodent vos conventions »
+Mazlum Tosun & Guillaume Leroy · GroupBees
+
+Fil rouge (le « parcours », repris en frise) :
+  1 CLAUDE.md perso → 2 CLAUDE.md partagé → 3 skills modulaires
+  → 4 sync global → 5 skills par projet (package manager).
+
+Abeilles décoratives : clé `bees` sur chaque slide, tuples
+(fichier, x, y, hauteur[, rotation°[, flip]]) en pouces. Assets dans assets/ :
+bee.png (clin d'œil), bee_happy.png, bee_cool.png (lunettes), bee_grad.png
+(diplômée), bee_astro.png (astronaute).
+"""
+
+DECK_NAME = "talk_devfest_skills"
+FOOTER_TEXT = "Industrialiser l'IA en équipe · DevFest Toulouse"
+
+JOURNEY = [
+    ("CLAUDE.md perso", "chacun son Claude"),
+    ("CLAUDE.md partagé", "un fichier pour tous"),
+    ("Skills modulaires", "chargés à la demande"),
+    ("Sync global", "~/.claude/skills"),
+    ("Skills par projet", "pollen.yaml"),
+]
+
+SLIDES = [
+    # ── Ouverture ───────────────────────────────────────────────────────────
+    {
+        "type": "title",
+        "title": "Industrialiser l'IA\nen équipe",
+        "subtitle": "Des skills qui encodent vos conventions",
+        "footer": "Mazlum Tosun & Guillaume Leroy · GroupBees · DevFest Toulouse 2026",
+        "bees": [("bee_happy.png", 7.6, 0.45, 0.95, -12, True)],
+        "notes": (
+            "Bonjour à tous ! Générer du code avec une IA, aujourd'hui, c'est "
+            "trivial. Le générer comme votre équipe l'attend, c'est une autre "
+            "histoire. On va vous raconter comment on s'y est pris chez GroupBees."
+        ),
+    },
+    {
+        "type": "speakers",
+        "title": "Qui sommes-nous ?",
+        "speakers": [
+            {
+                "name": "Mazlum Tosun",
+                "photo": "mazlum.jpg",
+                "initials": "MT",
+                "roles": [
+                    "Head of Data · GroupBees",
+                    "Google Developer Expert Cloud",
+                    "Docker Captain",
+                ],
+                "badges": [("badge_gde.png", 0.38), ("badge_docker_captain.png", 0.7)],
+            },
+            {
+                "name": "Guillaume Leroy",
+                # Photo carrée dans assets/ —
+                # à défaut, les initiales s'affichent.
+                "photo": "guillaume.png",
+                "initials": "GL",
+                "roles": [
+                    "Platform Engineer & SRE · GroupBees",
+                    "Fondateur · THEREALM",
+                    "Formateur · EPITECH & Polytech",
+                ],
+            },
+        ],
+        "bees": [
+            ("bee_cool.png", 11.75, 0.25, 1.1, 8),
+            ("bee_grad.png", 11.6, 5.1, 1.25, -6),
+        ],
+        "notes": (
+            "Mazlum : Head of Data chez GroupBees, GDE Cloud et Docker Captain. "
+            "Guillaume : Platform Engineer & SRE chez GroupBees, fondateur de "
+            "THEREALM, et formateur à EPITECH et Polytech."
+        ),
+    },
+    # ── Contexte GroupBees ──────────────────────────────────────────────────
+    {
+        "type": "bullets",
+        "title": "Le contexte : une plateforme d'API",
+        "image": "bee_astro.png",
+        "bullets": [
+            "Un registre d'API : les producers publient, les consumers découvrent",
+            "De l'IA par-dessus pour générer ce qui gravite autour",
+            "Back Python / FastAPI en archi hexagonale",
+            "GCP : Cloud Run, IAP, IaC Terragrunt",
+            "CI/CD GitHub Actions, du trunk à la prod",
+        ],
+        "notes": (
+            "TODO : préciser en une phrase ce que l'IA génère sur la plateforme. "
+            "L'idée : poser une stack moderne mais exigeante — hexagonal, "
+            "Terragrunt, WIF, IAP. Pas triviale pour tout le monde."
+        ),
+    },
+    {
+        "type": "bullets",
+        "title": "L'équipe",
+        "image": "bee_grad.png",
+        "bullets": [
+            "Une équipe de 8 personnes",
+            "Quelques seniors… un junior… et un stagiaire",
+            "Les seniors ont posé les fondations : backend, cloud, IaC",
+            "Des concepts pas évidents à s'approprier pour tout le monde",
+        ],
+        "kicker": "Claude aide chacun à avancer. Mais chacun à sa façon.",
+        "notes": (
+            "Les seniors ont généré le premier backend, les fondations cloud et "
+            "l'IaC. Avec leur Claude, les autres ont réussi à faire évoluer ces "
+            "stacks — c'est le côté positif."
+        ),
+    },
+    {
+        "type": "bullets",
+        "title": "Le problème : ça diverge",
+        "bullets": [
+            "Chacun génère avec Claude Code dans son coin",
+            "Chacun son CLAUDE.md global, ses habitudes, ses prompts",
+            "Nouveau backend, nouvelle stack IaC : conventions ignorées",
+            "Dockerfile, tests, CI, PR : huit devs, huit façons de faire",
+        ],
+        "kicker": "Même IA, même stack… et pourtant du code qui ne se ressemble pas.",
+        "bees": [("bee.png", 11.85, 0.3, 1.05, 10)],
+        "notes": (
+            "Dès qu'il fallait générer quelque chose de nouveau — un nouveau "
+            "service back, une nouvelle stack IaC — les conventions n'étaient "
+            "pas respectées. L'IA est douée, mais elle ne connaît pas NOS règles."
+        ),
+    },
+    # ── 2. Le CLAUDE.md partagé ─────────────────────────────────────────────
+    {
+        "type": "journey",
+        "title": "Première idée : un CLAUDE.md commun",
+        "steps": JOURNEY,
+        "current": 1,
+        "kicker": "Un fichier pour tous : la bonne idée… pour un temps.",
+        "mascot": "bee_happy.png",
+        "notes": (
+            "Premier réflexe, naturel : on écrit un CLAUDE.md qu'on se partage. "
+            "Toutes nos règles au même endroit."
+        ),
+    },
+    {
+        "type": "bullets",
+        "title": "Le CLAUDE.md qui grossit",
+        "bullets": [
+            "Ça marche… au début",
+            "Chaque règle ajoutée pour tous, chargée à chaque session",
+            "Un monolithe : Docker, Terragrunt, commits, tests… tout mélangé",
+            "Coûteux en tokens, et du bruit pour l'IA",
+            "Personne n'ose plus y toucher",
+        ],
+        "kicker": "On a recréé le monolithe qu'on refuse dans notre code.",
+        "bees": [("bee_cool.png", 11.8, 0.3, 1.0, -8)],
+        "notes": (
+            "Montrer un vrai CLAUDE.md qui scrolle sans fin. Le problème n'est "
+            "pas le contenu, c'est qu'il est chargé en permanence, même quand "
+            "on écrit un commit et pas un Dockerfile."
+        ),
+    },
+    # ── 3. Les skills ───────────────────────────────────────────────────────
+    {
+        "type": "journey",
+        "title": "Du monolithe aux modules : les skills",
+        "steps": JOURNEY,
+        "current": 2,
+        "kicker": "Découper, et ne charger que ce dont la tâche a besoin.",
+        "mascot": "bee.png",
+        "notes": (
+            "Naturellement, on a découpé : c'est l'idée des skills. Un CLAUDE.md "
+            "modulaire, chargé à la demande."
+        ),
+    },
+    {
+        "type": "code",
+        "title": "Anatomie d'un skill",
+        "code": (
+            "# skills/docker/docker-image-conventions/SKILL.md\n"
+            "---\n"
+            "name: docker-image-conventions\n"
+            "description: Stack-agnostic conventions for production Dockerfiles —\n"
+            "  multi-stage, non-root at runtime, smallest viable base image...\n"
+            "  Trigger when creating, editing, or reviewing any Dockerfile.\n"
+            "---\n"
+            "\n"
+            "# Production Docker images — multi-stage + non-root\n"
+            "1. Multi-stage build : builder + runtime\n"
+            "2. Non-root user at runtime\n"
+            "..."
+        ),
+        "kicker": "Seule la description est toujours chargée. Le corps, à la demande.",
+        "notes": (
+            "Un skill = un dossier, un SKILL.md, le standard ouvert Agent Skills "
+            "(agentskills.io). La description sert de déclencheur : l'agent la "
+            "voit en permanence, et ne lit le corps que si la tâche matche. "
+            "C'est la progressive disclosure. Lu tel quel par Claude Code, "
+            "Copilot, Cursor, Codex, Gemini CLI."
+        ),
+    },
+    {
+        "type": "code",
+        "title": "Un skill, c'est un dossier",
+        "code": (
+            "skills/\n"
+            "├── docker/python-docker-multistage/\n"
+            "│   ├── SKILL.md          # les règles : lu au déclenchement\n"
+            "│   └── assets/           # copié dans le projet, puis adapté\n"
+            "│       ├── Dockerfile\n"
+            "│       └── dockerignore\n"
+            "├── docker/docker-image-conventions/\n"
+            "│   ├── SKILL.md\n"
+            "│   └── references/       # lu seulement si la tâche le demande\n"
+            "│       └── node.md  jvm.md  go.md  rust.md  nginx.md\n"
+            "└── git/tag-groupbees/\n"
+            "    ├── SKILL.md\n"
+            "    └── scripts/          # exécuté, jamais lu : 0 token\n"
+            "        └── pre-tag-check.sh"
+        ),
+        "kicker": "SKILL.md dit quoi faire. scripts/, references/, assets/ : avec quoi.",
+        "bees": [("bee_cool.png", 11.85, 0.25, 1.0, 8)],
+        "notes": (
+            "Le standard Agent Skills prévoit trois dossiers optionnels à côté "
+            "du SKILL.md. references/ : de la doc lue à la demande — sur un "
+            "projet Node, l'agent lit node.md, pas les quatre autres. assets/ : "
+            "des fichiers complets à copier — le Dockerfile Python, celui qui "
+            "tourne en prod sur Solis. scripts/ : du code exécuté, jamais chargé "
+            "dans le contexte — une convention vérifiable devient un script "
+            "plutôt qu'une phrase. Trois niveaux de chargement : la description "
+            "toujours, le SKILL.md au déclenchement, le reste seulement si "
+            "besoin. Notre CI refuse tout autre dossier. → Bascule IDE sur "
+            "skills-core pour ouvrir ces trois skills."
+        ),
+    },
+    {
+        "type": "compare",
+        "title": "CLAUDE.md monolithe vs skills",
+        "left": {
+            "title": "CLAUDE.md monolithe",
+            "items": [
+                "Tout chargé, tout le temps",
+                "Un fichier, tous les sujets",
+                "Relu par personne",
+                "Spécifique à un outil",
+            ],
+        },
+        "right": {
+            "title": "Skills",
+            "items": [
+                "Chargés quand la tâche le demande",
+                "Un skill = une convention",
+                "Versionnés et relus en PR",
+                "Standard ouvert, multi-agents",
+            ],
+        },
+        "kicker": "Le CLAUDE.md reste : fin, pour le contexte du projet.",
+        "notes": (
+            "On ne jette pas le CLAUDE.md : il redevient ce qu'il doit être, le "
+            "contexte durable du projet (chez nous un AGENTS.md + un pont "
+            "CLAUDE.md). Les conventions, elles, partent dans les skills."
+        ),
+    },
+    {
+        "type": "code",
+        "title": "Modulariser : des domaines qui se composent",
+        "code": (
+            "skills/\n"
+            "├── docker/\n"
+            "│   ├── docker-image-conventions/   # universel : multi-stage, non-root\n"
+            "│   └── python-docker-multistage/   # + Python : uv, slim vs alpine\n"
+            "├── env/\n"
+            "│   └── direnv-local-env/           # universel : .envrc, pas de .env\n"
+            "├── python/\n"
+            "│   ├── python-uv-direnv/           # + Python : venv uv via direnv\n"
+            "│   └── python-hexagonal-clean-archi/\n"
+            "├── git/        # commit-, pr-, tag-groupbees\n"
+            "├── gcp/        # cloud-run-iap\n"
+            "└── terraform/  # terragrunt-modular-style"
+        ),
+        "kicker": "Un skill générique + un skill qui le spécialise, plutôt qu'un gros skill.",
+        "notes": (
+            "L'exemple de découpage : docker-image-conventions est agnostique du "
+            "langage ; python-docker-multistage se compose par-dessus et n'ajoute "
+            "que le spécifique Python. Même logique direnv / python-uv-direnv. "
+            "Chaque skill reste petit, et le générique sert aux autres stacks."
+        ),
+    },
+    # ── 4. Sync global ──────────────────────────────────────────────────────
+    {
+        "type": "journey",
+        "title": "Partager : un catalogue synchronisé en global",
+        "steps": JOURNEY,
+        "current": 3,
+        "kicker": "Un catalogue git, installé sur chaque poste.",
+        "mascot": "bee_cool.png",
+        "notes": (
+            "Il fallait ensuite partager ces skills. Première approche : un "
+            "catalogue git, synchronisé sur la machine de chaque dev."
+        ),
+    },
+    {
+        "type": "code",
+        "title": "Un module de skills, synchronisé en global",
+        "code": (
+            "# skills-core/  (+ skills-slides, skills-articles, …)\n"
+            "#   skills-module.json   → { name, description }\n"
+            "#   skills/<domaine>/<skill>/SKILL.md\n"
+            "\n"
+            "git pull && ./sync-skills.sh --prune\n"
+            "\n"
+            "# → ~/.claude/skills/   Claude Code, Copilot VS Code, Cursor\n"
+            "# → ~/.agents/skills/   Copilot JetBrains / CLI\n"
+            "# ledger par module : --prune / --uninstall ne touchent que lui\n"
+            "\n"
+            "git checkout v1.2.0 && ./sync-skills.sh --prune   # épingler"
+        ),
+        "kicker": "Versionné par tags git, validé en CI. Simple, et ça marche.",
+        "notes": (
+            "Un module = un repo git. Le script copie chaque skill dans les "
+            "répertoires personnels que lisent les outils. Plusieurs modules "
+            "cohabitent grâce à un ledger par module. Version = tag git."
+        ),
+    },
+    {
+        "type": "compare",
+        "title": "Global : la limite",
+        "left": {
+            "title": "Skills en global",
+            "items": [
+                "Actifs sur TOUS les projets",
+                "Conventions GroupBees chez le client",
+                "Une seule version pour tous les repos",
+                "Le repo ne dit pas ce qu'il attend",
+            ],
+        },
+        "right": {
+            "title": "Skills par projet",
+            "items": [
+                "Chaque projet choisit ses modules",
+                "GroupBees, client, perso : sans mélange",
+                "Version épinglée par projet",
+                "Déclaré et versionné avec le code",
+            ],
+        },
+        "kicker": "De bonnes pratiques… mais on veut choisir où elles s'appliquent.",
+        "bees": [("bee_happy.png", 11.9, 0.3, 1.0, 10)],
+        "notes": (
+            "Chargé en global, ça s'applique tout le temps, même sur nos projets "
+            "non-GroupBees ou chez un client qui a ses propres règles. Même si ce "
+            "sont de bonnes pratiques, on veut la flexibilité de choisir."
+        ),
+    },
+    # ── 5. Par projet ───────────────────────────────────────────────────────
+    {
+        "type": "journey",
+        "title": "Par projet : un gestionnaire de skills",
+        "steps": JOURNEY,
+        "current": 4,
+        "kicker": "Importer des modules de skills, comme des dépendances.",
+        "mascot": "bee_astro.png",
+        "notes": (
+            "D'où l'idée : ne pas copier les skills dans chaque projet, mais "
+            "garder des modules de skills et les importer, comme des dépendances."
+        ),
+    },
+    {
+        "type": "bullets",
+        "title": "S'appuyer sur les standards",
+        "bullets": [
+            "Agent Skills : le format SKILL.md (agentskills.io)",
+            "Agent Plugins : un format de paquet — plugin.json + skills/",
+            "Portés par Vercel, Google, Microsoft, OpenAI, AWS, Cursor…",
+            "Ni installeur, ni épinglage : c'est le rôle d'un outil",
+        ],
+        "kicker": "Agent Skills pour le format. Agent Plugins quand un client en aura besoin.",
+        "bees": [("bee.png", 11.8, 0.3, 1.0, -10, True)],
+        "notes": (
+            "Agent Skills standardise le skill. Agent Plugins (v1.0, août 2026) "
+            "standardise le paquet, mais ne lit que skills/<nom>/ : nos domaines "
+            "skills/<domaine>/<nom>/ y seraient invisibles, et Claude Code garde "
+            "son propre .claude-plugin/plugin.json. On l'adoptera quand un client "
+            "qui installe des plugins en aura besoin. La spec ne définit ni "
+            "installation ni registre : c'est là qu'intervient pollen."
+        ),
+    },
+    {
+        "type": "code",
+        "title": "pollen : les skills comme des dépendances",
+        "code": (
+            "# pollen.yaml — committé à la racine du projet\n"
+            "repos:\n"
+            "  - repo: git@github.com:groupbees/skills-core.git\n"
+            "    revision: e674d360…  # v0.2.5\n"
+            "    paths:\n"
+            "      - path: skills/python      # on choisit ses domaines\n"
+            "      - path: skills/docker\n"
+            "  - repo: local                    # skills propres au projet\n"
+            "    paths:\n"
+            "      - path: .skills\n"
+            "\n"
+            "$ pollen update   # → .claude/skills/ + .agents/skills/"
+        ),
+        "kicker": "Le projet déclare ses conventions. Un seul fichier, relu en PR.",
+        "notes": (
+            "pollen, notre CLI open source (Rust). Syntaxe inspirée de "
+            "pre-commit : une liste de sources, chacune épinglée. Il installe, "
+            "rafraîchit ce qui a bougé et supprime ce qu'on a retiré. Sources "
+            "git — SSH pour les repos privés — ou dossier local. Déployé dans "
+            ".claude/skills et .agents/skills : tous les agents sont servis."
+        ),
+    },
+    {
+        "type": "bullets",
+        "title": "pollen, en pratique",
+        "image": "bee_cool.png",
+        "bullets": [
+            "Déclaratif : install, refresh, prune",
+            "Par projet, ou pour la machine : pollen update -g",
+            "Ne touche jamais un skill qu'il n'a pas installé",
+            "Une config par dossier cible, pas de suppression croisée",
+            "Pas un registre, pas de résolution de dépendances",
+        ],
+        "notes": (
+            "On assume un périmètre étroit : pollen déplace des dossiers qui "
+            "existent et les valide contre la spec. Son état (.pollen.json) "
+            "enregistre ce qu'il a installé et quelle config possède le "
+            "dossier : un skill écrit à la main n'est jamais écrasé, et une "
+            "seconde config sur le même dossier est refusée."
+        ),
+    },
+    {
+        "type": "code",
+        "title": "Épingler un commit… et pas de lockfile",
+        "code": (
+            "# un commit ne bouge pas — un tag peut, une branche bouge à chaque push\n"
+            "revision: 4e1e8e25a2f32d8311cd52c5d9a703bad990e525  # v0.2.0\n"
+            "\n"
+            "$ pollen outdated\n"
+            "skills-core  4e1e8e25 (v0.2.0)  -> v0.2.5\n"
+            "\n"
+            "$ pollen autoupdate --freeze     # réécrit le SHA et le tag\n"
+            "$ pollen validate --pinned       # en CI : refuse tags et branches"
+        ),
+        "kicker": "Ni plage de versions, ni dépendance transitive : le SHA est le lock.",
+        "notes": (
+            "On nous demande souvent : et le lockfile ? Un lockfile fige ce "
+            "qu'un résolveur a choisi : des plages de versions et des "
+            "dépendances transitives. pollen n'a ni l'un ni l'autre. Le commit "
+            "épinglé dans pollen.yaml EST le lock, le tag en commentaire le rend "
+            "lisible, et autoupdate --freeze (ou Renovate) le met à jour."
+        ),
+    },
+    {
+        "type": "code",
+        "title": "Un fichier, trois propriétaires",
+        "code": (
+            "# ~/.config/pollen/pollen.yaml  →  pollen update -g\n"
+            "repos:\n"
+            "  - repo: git@github.com:groupbees/skills-core.git     # orga, privé\n"
+            "    revision: e674d360…  # v0.2.5\n"
+            "  - repo: git@github.com:groupbees/skills-slides.git   # orga, privé\n"
+            "    revision: 0233458c…  # v0.2.0\n"
+            "  - repo: https://github.com/groupbees/skills-opensource  # orga, public\n"
+            "    revision: acad0f52…  # v0.1.0\n"
+            "  - repo: https://github.com/groupbees/pollen           # le skill pollen\n"
+            "    revision: c49400b8…  # v0.4.0\n"
+            "  - repo: https://github.com/tosun-si/skills-articles   # perso\n"
+            "    revision: 5ff0ccf9…  # v0.1.0"
+        ),
+        "kicker": "Mes conventions perso ne polluent pas l'équipe : un fichier, cinq commits.",
+        "bees": [("bee_happy.png", 11.9, 0.3, 0.95, 10)],
+        "notes": (
+            "Ma vraie config machine (les paths sont omis). Des modules de "
+            "l'orga privés et publics, le skill de pollen lui-même, et un module "
+            "perso sur mon compte : les règles d'équipe et les miennes se "
+            "composent sans se mélanger. Un module perso vit sur le compte de "
+            "celui qui le maintient ; un module d'équipe dans l'orga."
+        ),
+    },
+    {
+        "type": "compare",
+        "title": "Et Spec Kit, BMAD ?",
+        "muted_left": False,
+        "left": {
+            "title": "Skills de processus",
+            "items": [
+                "Spec Kit, BMAD : le quoi et le quand",
+                "spec · plan · tasks · implement",
+                "Un cycle par feature",
+                "Nos conventions ? En prose, à injecter",
+            ],
+        },
+        "right": {
+            "title": "Skills de conventions",
+            "items": [
+                "GroupBees : le comment",
+                "Archi, Dockerfile, CI, Git, IaC",
+                "Actifs sur tout le projet",
+                "Une convention = un skill, à la demande",
+            ],
+        },
+        "kicker": "Même format SKILL.md, autre contenu : ils se composent.",
+        "bees": [("bee_cool.png", 11.85, 0.3, 1.0, -8)],
+        "notes": (
+            "Question qu'on nous pose souvent. Spec Kit (GitHub, v1.0) et BMAD "
+            "(v6) sont eux-mêmes livrés en Agent Skills : /speckit-specify, "
+            "plan, tasks… et les personas BMAD (analyste, PM, architecte, dev). "
+            "Ils structurent le processus d'une feature. Nos conventions "
+            "techniques, eux les prennent en prose : la constitution.md de Spec "
+            "Kit, les persistent_facts de BMAD. Les deux se composent : un "
+            "/speckit-plan dans un repo qui a nos skills sort un plan hexagonal, "
+            "avec notre Dockerfile et notre CI. Et eux aussi ont leur CLI de "
+            "distribution par projet : le problème qu'on résout avec pollen "
+            "est le même pour tout le monde."
+        ),
+    },
+    {
+        "type": "demo",
+        "title": "Même prompt, sans puis avec les skills",
+        "steps": [
+            "Session vierge : le prompt, la sortie générique",
+            "pollen update : les skills du projet arrivent",
+            "Même prompt : hexagonal, Dockerfile, tests, CI",
+            "Commit squashé, PR labellisée, pipeline jusqu'à Cloud Run",
+        ],
+        "notes": (
+            "Session vierge = terminal gauche : claude --safe-mode "
+            "--disable-slash-commands (ni CLAUDE.md, ni skills, même les "
+            "built-in). Le moment clé, c'est le contraste. Ce ne sont pas les talents de "
+            "l'IA qui font la différence, ce sont les règles. Filets : URL déjà "
+            "déployée + screencast."
+        ),
+    },
+    # ── Gouvernance ─────────────────────────────────────────────────────────
+    {
+        "type": "bullets",
+        "title": "Une lib de skills, ça se gouverne",
+        "bullets": [
+            "Les skills sont du code : versionnés, relus en PR",
+            "Blast radius : un skill s'applique à tout ce qui est généré",
+            "L'IA drafte les mises à jour, l'humain relit et merge",
+            "Capture à chaud : un gotcha rencontré remonte dans le skill",
+            "Une PR, un relecteur (pas l'auteur), la CI fait le reste",
+        ],
+        "kicker": "Sans gouvernance, on recrée le monolithe… éclaté en N fichiers.",
+        "bees": [("bee_grad.png", 11.8, 0.2, 1.15, 6)],
+        "notes": (
+            "War story : un skill Terragrunt référençait run-all, remplacé par "
+            "run --all. Péremption factuelle, parfaite pour un scan IA. La "
+            "péremption de jugement — est-ce encore notre convention ? — reste "
+            "humaine."
+        ),
+    },
+    {
+        "type": "code",
+        "title": "La CI d'un module de skills",
+        "code": (
+            "# .github/workflows/ci.yml d'un module : une seule ligne utile\n"
+            "jobs:\n"
+            "  module:\n"
+            "    uses: groupbees/.github/.github/workflows/skills-module.yml@3b24f023…  # v1.1.0\n"
+            "\n"
+            "# ce que vérifie le workflow partagé, à chaque PR :\n"
+            "#   skill-validator --strict   spec, tokens, liens, descriptions\n"
+            "#   pollen validate            se déploie comme chez un consommateur\n"
+            "#   README généré · noms uniques · shellcheck"
+        ),
+        "kicker": "Barre de review plus haute que pour du code : ça s'applique à tout.",
+        "notes": (
+            "skill-validator (agent-ecosystem, open source) : conformité à la "
+            "spec, budget de tokens, liens cassés, fichiers orphelins, qualité "
+            "des descriptions. La CI vit dans un workflow partagé public, "
+            "épinglé par commit ; Dependabot ouvre la PR quand il évolue."
+        ),
+    },
+    {
+        "type": "bullets",
+        "title": "La doc d'un outil est aussi un skill",
+        "bullets": [
+            "Chaque module réexpliquait pollen : 13 fichiers par version",
+            "Le skill pollen vit dans le repo pollen, versionné avec lui",
+            "Installé… par pollen, au niveau projet ou machine",
+            "Les modules ne gardent qu'un lien",
+            "Même règle pour la CI : un workflow partagé, épinglé",
+        ],
+        "kicker": "Une source par sujet. Sinon le monolithe revient, en N copies.",
+        "bees": [("bee_astro.png", 11.85, 0.2, 1.1, -8)],
+        "notes": (
+            "War story : à la première montée de version de pollen, il a fallu "
+            "retoucher 13 fichiers dans nos modules. C'était exactement le "
+            "CLAUDE.md monolithique qu'on dénonce, dupliqué. La connaissance de "
+            "l'outil est devenue un skill livré avec l'outil ; les modules n'ont "
+            "plus rien à retoucher."
+        ),
+    },
+    {
+        "type": "bullets",
+        "title": "Ce qu'on retient de Google",
+        "bullets": [
+            "« Skills are products, not snippets »",
+            "Evals obligatoires à la soumission : prompts + grille de score",
+            "Evals hebdomadaires sur toute la lib, sur plusieurs agents",
+            "Deux axes : précision × efficacité (tokens, temps)",
+            "Un owner par skill quand une API change ou qu'une eval régresse",
+        ],
+        "kicker": "Notre prochaine marche : des evals sur nos skills.",
+        "bees": [("bee_cool.png", 11.85, 0.25, 1.0, 8)],
+        "notes": (
+            "Source : blog Google Cloud « Behind the scenes: how we build, test "
+            "and scale Google agent skills » (août 2026). Leur CI : lint, "
+            "vérification des liens, checklists assistées par IA, et surtout les "
+            "evals. C'est là qu'on n'en est pas encore. Et un owner par skill : "
+            "nous, on est huit, pas Google. Chez nous, n'importe qui relit une "
+            "PR de skill, sauf son auteur, et la CI vérifie le mécanique. "
+            "Petite équipe : la confiance et la CI, pas l'organigramme. "
+            "Adaptez la gouvernance à votre taille, mais gardez-en une."
+        ),
+    },
+    # ── Clôture ─────────────────────────────────────────────────────────────
+    {
+        "type": "takeaways",
+        "title": "À retenir",
+        "items": [
+            ("Vos conventions, en skills", "Petits, composables, chargés à la demande"),
+            ("Déclarés par projet, épinglés", "Un commit par source : le pollen.yaml est le lock"),
+            ("Gouvernés comme du code", "Relecture par un pair, CI… et bientôt des evals"),
+        ],
+        "notes": "Trois idées à ramener lundi matin dans votre équipe.",
+    },
+    {
+        "type": "end",
+        "title": "Pas par magie.",
+        "mascot": "bee_happy.png",
+        "lines": [
+            "Parce que les règles sont là.",
+            "github.com/groupbees/pollen",
+            "Merci ! Des questions ?",
+        ],
+        "notes": "Merci ! On prend vos questions.",
+    },
+]

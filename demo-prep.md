@@ -21,7 +21,7 @@ slides + le contraste capturé.
 - [ ] Skills à jour + testés ; `~/.claude` dans l'état voulu.
 
 ## 3. Rendre le CONTRASTE déterministe (le climax)
-- [ ] Onglet/term « SANS » prêt : `claude --bare --disable-slash-commands` dans un dossier vierge.
+- [ ] Onglet/term « SANS » prêt : `claude --safe-mode --disable-slash-commands` dans un dossier vierge.
 - [ ] Onglet/term « AVEC » prêt : `claude` dans le dossier projet.
 - [ ] Les **deux sorties déjà capturées** en répét' (fichiers ouverts) → bascule immédiate si la génération live traîne.
 - [ ] Vue **côte à côte** prête (split screen / 2 Dockerfile) pour montrer le delta visuellement.

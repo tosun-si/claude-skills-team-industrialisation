@@ -107,7 +107,7 @@ SLIDES = [
         "kicker": "Claude aide chacun à avancer. Mais chacun à sa façon.",
         "notes": (
             "Les seniors ont généré le premier backend, les fondations cloud et "
-            "l'IaC. Avec leur Claude, les autres ont réussi à faire évoluer ces "
+            "l'IaC — et, plus tard, les premiers skills transverses. Avec leur Claude, les autres ont réussi à faire évoluer ces "
             "stacks — c'est le côté positif."
         ),
     },
@@ -360,27 +360,41 @@ SLIDES = [
         "mascot": "bee_astro.png",
         "notes": (
             "D'où l'idée : ne pas copier les skills dans chaque projet, mais "
-            "garder des modules de skills et les importer, comme des dépendances."
+            "garder des modules de skills et les importer, comme des dépendances. "
+            "Et la factory va accueillir de nouveaux projets après Solis : chacun "
+            "déclarera les skills d'équipe dont il a besoin, plus ses propres "
+            "skills spécialisés."
         ),
     },
     {
         "type": "bullets",
         "title": "S'appuyer sur les standards",
         "bullets": [
-            "Agent Skills : le format SKILL.md (agentskills.io)",
-            "Agent Plugins : un format de paquet — plugin.json + skills/",
-            "Portés par Vercel, Google, Microsoft, OpenAI, AWS, Cursor…",
-            "Ni installeur, ni épinglage : c'est le rôle d'un outil",
+            "Agent Skills : un format ouvert, SKILL.md (agentskills.io)",
+            "Lu tel quel par Claude Code, Copilot, Cursor, Codex, Gemini CLI…",
+            "AGENTS.md pour le contexte du projet, SKILL.md pour les conventions",
+            "Vérifié en CI : skill-validator contrôle le format",
+            "Ni installation ni épinglage dans le standard : c'est le rôle de pollen",
         ],
-        "kicker": "Agent Skills pour le format. Agent Plugins quand un client en aura besoin.",
+        "kicker": "Écrits une fois, lus par tous les agents : aucun lock-in.",
         "bees": [("bee.png", 11.8, 0.3, 1.0, -10, True)],
         "notes": (
-            "Agent Skills standardise le skill. Agent Plugins (v1.0, août 2026) "
-            "standardise le paquet, mais ne lit que skills/<nom>/ : nos domaines "
-            "skills/<domaine>/<nom>/ y seraient invisibles, et Claude Code garde "
-            "son propre .claude-plugin/plugin.json. On l'adoptera quand un client "
-            "qui installe des plugins en aura besoin. La spec ne définit ni "
-            "installation ni registre : c'est là qu'intervient pollen."
+            "On s'appuie sur des standards ouverts, rien de propre à un outil. "
+            "Un skill, c'est un dossier avec un SKILL.md : le même fichier est lu "
+            "par Claude Code, Copilot, Cursor, Codex ou Gemini CLI. pollen le "
+            "déploie dans .claude/skills et .agents/skills, le dossier commun "
+            "aux autres agents : Claude Code, lui, ne lit encore que "
+            ".claude/skills (vérifié sur la v2.1.303), d'où les deux cibles — et dans .github/skills si on veut Copilot : une ligne "
+            "dans pollen.yaml. Si l'équipe change d'agent demain, les skills "
+            "restent. AGENTS.md, lui aussi standard, porte le contexte durable "
+            "du projet ; les conventions vivent dans les skills. Claude Code "
+            "lit AGENTS.md nativement depuis la v2.1.277, mais seulement quand "
+            "le repo n'a pas de CLAUDE.md : on garde donc un CLAUDE.md d'une "
+            "ligne, @AGENTS.md, qui marche dans toutes les sessions et ne fait "
+            "jamais lire le fichier deux fois. Si on nous "
+            "parle d'Agent Plugins (le format de paquet, v1.0 en août 2026) : "
+            "on ne l'utilise pas. Il ne lit que skills/<nom>/, nos domaines "
+            "y seraient invisibles, et pollen n'en a pas besoin pour déployer."
         ),
     },
     {
@@ -390,7 +404,7 @@ SLIDES = [
             "# pollen.yaml — committé à la racine du projet\n"
             "repos:\n"
             "  - repo: git@github.com:groupbees/skills-core.git\n"
-            "    revision: e674d360…  # v0.2.5\n"
+            "    revision: 351fd495…  # v0.3.1\n"
             "    paths:\n"
             "      - path: skills/python      # on choisit ses domaines\n"
             "      - path: skills/docker\n"
@@ -457,15 +471,15 @@ SLIDES = [
             "# ~/.config/pollen/pollen.yaml  →  pollen update -g\n"
             "repos:\n"
             "  - repo: git@github.com:groupbees/skills-core.git     # orga, privé\n"
-            "    revision: e674d360…  # v0.2.5\n"
+            "    revision: 351fd495…  # v0.3.1\n"
             "  - repo: git@github.com:groupbees/skills-slides.git   # orga, privé\n"
-            "    revision: 0233458c…  # v0.2.0\n"
+            "    revision: e4d83514…  # v0.4.0\n"
             "  - repo: https://github.com/groupbees/skills-opensource  # orga, public\n"
-            "    revision: acad0f52…  # v0.1.0\n"
+            "    revision: 3a461867…  # v0.1.1\n"
             "  - repo: https://github.com/groupbees/pollen           # le skill pollen\n"
-            "    revision: c49400b8…  # v0.4.0\n"
+            "    revision: c327e7e7…  # v0.5.0\n"
             "  - repo: https://github.com/tosun-si/skills-articles   # perso\n"
-            "    revision: 5ff0ccf9…  # v0.1.0"
+            "    revision: cd21b30d…  # v0.1.1"
         ),
         "kicker": "Mes conventions perso ne polluent pas l'équipe : un fichier, cinq commits.",
         "bees": [("bee_happy.png", 11.9, 0.3, 0.95, 10)],
@@ -540,7 +554,7 @@ SLIDES = [
             "Blast radius : un skill s'applique à tout ce qui est généré",
             "L'IA drafte les mises à jour, l'humain relit et merge",
             "Capture à chaud : un gotcha rencontré remonte dans le skill",
-            "Une PR, un relecteur (pas l'auteur), la CI fait le reste",
+            "Relecture : référents tech (transverse), référents du domaine (spécialisé)",
         ],
         "kicker": "Sans gouvernance, on recrée le monolithe… éclaté en N fichiers.",
         "bees": [("bee_grad.png", 11.8, 0.2, 1.15, 6)],
@@ -548,7 +562,18 @@ SLIDES = [
             "War story : un skill Terragrunt référençait run-all, remplacé par "
             "run --all. Péremption factuelle, parfaite pour un scan IA. La "
             "péremption de jugement — est-ce encore notre convention ? — reste "
-            "humaine."
+            "humaine. Qui relit ? Les skills transverses (Docker, CI, IaC, "
+            "commits…) : les référents tech, Guillaume et moi, qui les avons "
+            "posés au départ. Un skill spécialisé, comme celui de l'API Solis, "
+            "est porté par les référents du domaine : Iliass, chercheur, qui "
+            "implémente une bonne partie des features de Solis, avec Youssef, "
+            "lead API et produit, et Rafik, entre tech et produit. Des profils "
+            "tech, spécialisés sur ce sujet, qui en savent plus que nous : on "
+            "relit avec eux. Chez Orange, notre client, même modèle : les "
+            "modules transverses sont tenus par les référents tech et l'équipe "
+            "platform, les repos spécialisés par le référent de leur domaine. "
+            "Toujours une PR, jamais relue par son "
+            "seul auteur, et la CI vérifie le mécanique."
         ),
     },
     {
@@ -610,9 +635,10 @@ SLIDES = [
             "and scale Google agent skills » (août 2026). Leur CI : lint, "
             "vérification des liens, checklists assistées par IA, et surtout les "
             "evals. C'est là qu'on n'en est pas encore. Et un owner par skill : "
-            "nous, on est huit, pas Google. Chez nous, n'importe qui relit une "
-            "PR de skill, sauf son auteur, et la CI vérifie le mécanique. "
-            "Petite équipe : la confiance et la CI, pas l'organigramme. "
+            "nous, on est huit, pas Google. Pas d'organigramme, mais ceux qui "
+            "savent : les référents tech relisent le transverse, les référents "
+            "d'un domaine portent ses skills spécialisés, et la CI vérifie le "
+            "mécanique. "
             "Adaptez la gouvernance à votre taille, mais gardez-en une."
         ),
     },

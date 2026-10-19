@@ -68,8 +68,9 @@ Punchline : **« Pas par magie : parce que les règles sont là. »**
    `~/.agents/skills`, ledger par module, versions = tags git).
 6. **Limite du global** : s'applique à tous les projets (non-GB, clients) → on
    veut choisir par projet.
-7. **Par projet** : modules de skills aux standards **Agent Skills** (+ Agent
-   Plugins pour le packaging) importés via un **gestionnaire de skills** (skillmgr).
+7. **Par projet** : modules de skills au standard **Agent Skills** (agnostique :
+   tous les agents) importés via un **gestionnaire de skills** (pollen). Agent
+   Plugins non utilisé (ne lit que `skills/<nom>/`).
 
 La frise « parcours » des slides reprend 5 étapes : CLAUDE.md perso → CLAUDE.md
 partagé → skills modulaires → sync global → skills par projet.
@@ -93,10 +94,19 @@ partagé → skills modulaires → sync global → skills par projet.
 - L'IA *drafte*, l'humain *possède* et merge ; l'IA sur-généralise les fixes.
 - Scanner IA de péremption : bon sur le *factuel*, faible sur le *jugement*.
 - Séparer durable (concepts) et volatil (flags, versions) dans chaque skill.
-- Capture à chaud des gotchas ; relecture par un pair (n'importe qui sauf
-  l'auteur) + CI, pas de CODEOWNERS (équipe de 8, modules privés en GitHub
-  Free : CODEOWNERS y serait ignoré) — point à rediscuter en équipe ;
-  pinning des versions.
+- Capture à chaud des gotchas ; pinning des versions.
+- Relecture par les **référents**, sans CODEOWNERS (équipe de 8, modules
+  privés en GitHub Free : CODEOWNERS y serait ignoré ; point à rediscuter en
+  équipe). Skills **transverses** : les référents tech (Mazlum, Guillaume),
+  qui les ont posés au départ. Skills **spécialisés** : les référents du
+  domaine, des profils tech spécialisés — pas des « métiers » (ex. skill API
+  Solis : Iliass, chercheur, qui implémente une bonne partie des features de
+  Solis ; Youssef, lead API et produit ; Rafik, hybride tech/produit), relus
+  avec eux. Même modèle chez Orange (client) : modules transverses tenus par
+  les référents tech + l'équipe platform, repos spécialisés par le référent du
+  domaine. La factory (`groupbees/factory`) accueillera bientôt d'autres
+  projets que Solis : chacun déclarera ses skills d'équipe + ses skills
+  spécialisés. Toujours une PR + la CI pour le mécanique.
 - Sans gouvernance : on recrée le monolithe, éclaté en N fichiers.
 
 ## War stories
@@ -175,6 +185,18 @@ partagé → skills modulaires → sync global → skills par projet.
   « skills are products, not snippets ».
 - **Exemple réel de bout en bout** : repo `gbf-solis-api-portal` (UI React + BFF
   FastAPI hexagonal, Terragrunt, CI/CD Cloud Run, IAP same-origin).
+
+## Faits vérifiés (Claude Code 2.1.303, 19/10/2026)
+
+- **AGENTS.md** : lu nativement depuis la v2.1.277, mais seulement s'il n'y a
+  aucun `CLAUDE.md` / `CLAUDE.local.md` dans le dossier ou au-dessus
+  (`~/.claude/CLAUDE.md` ne compte pas). Avec un `CLAUDE.md`, seul lui est lu
+  → on garde le pont `CLAUDE.md` = `@AGENTS.md` (doc officielle, page memory).
+- **Skills** : Claude Code ne lit que `.claude/skills/` (projet, parents
+  jusqu'à la racine du repo, sous-dossiers à la demande) et `~/.claude/skills/`
+  (+ plugins, managed, `--add-dir`). **Pas** `.agents/skills/` : vérifié par un
+  test réel (skill présent seulement dans `.agents/skills` → non chargé). D'où
+  les deux cibles par défaut de pollen.
 
 ## Slides
 

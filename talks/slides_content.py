@@ -195,7 +195,7 @@ SLIDES = [
             "(agentskills.io). La description sert de déclencheur : l'agent la "
             "voit en permanence, et ne lit le corps que si la tâche matche. "
             "C'est la progressive disclosure. Lu tel quel par Claude Code, "
-            "Copilot, Cursor, Codex, Gemini CLI."
+            "Copilot, Cursor, Codex, Antigravity CLI."
         ),
     },
     {
@@ -371,7 +371,7 @@ SLIDES = [
         "title": "S'appuyer sur les standards",
         "bullets": [
             "Agent Skills : un format ouvert, SKILL.md (agentskills.io)",
-            "Lu tel quel par Claude Code, Copilot, Cursor, Codex, Gemini CLI…",
+            "Lu tel quel par Claude Code, Copilot, Cursor, Codex, Antigravity CLI…",
             "AGENTS.md pour le contexte du projet, SKILL.md pour les conventions",
             "Vérifié en CI : skill-validator contrôle le format",
             "Ni installation ni épinglage dans le standard : c'est le rôle de pollen",
@@ -381,7 +381,7 @@ SLIDES = [
         "notes": (
             "On s'appuie sur des standards ouverts, rien de propre à un outil. "
             "Un skill, c'est un dossier avec un SKILL.md : le même fichier est lu "
-            "par Claude Code, Copilot, Cursor, Codex ou Gemini CLI. pollen le "
+            "par Claude Code, Copilot, Cursor, Codex ou Antigravity CLI. pollen le "
             "déploie dans .claude/skills et .agents/skills, le dossier commun "
             "aux autres agents : Claude Code, lui, ne lit encore que "
             ".claude/skills (vérifié sur la v2.1.303), d'où les deux cibles — et dans .github/skills si on veut Copilot : une ligne "
@@ -462,6 +462,43 @@ SLIDES = [
             "dépendances transitives. pollen n'a ni l'un ni l'autre. Le commit "
             "épinglé dans pollen.yaml EST le lock, le tag en commentaire le rend "
             "lisible, et autoupdate --freeze (ou Renovate) le met à jour."
+        ),
+    },
+    {
+        "type": "compare",
+        "title": "Et npx skills ?",
+        "left": {
+            "title": "npx skills (Vercel)",
+            "items": [
+                "Une CLI + un lockfile",
+                "Épingle un ref (tag) + un hash",
+                "Node ; déclaratif en expérimental",
+                "Très large : skills.sh, 75+ agents",
+            ],
+        },
+        "right": {
+            "title": "pollen",
+            "items": [
+                "Un pollen.yaml déclaratif",
+                "Épingle le commit d'une release",
+                "Un binaire, neutre côté langage",
+                "outdated / autoupdate, validate",
+            ],
+        },
+        "kicker": "Même standard Agent Skills dessous : les deux se composent.",
+        "notes": (
+            "La question qu'on nous pose le plus. npx skills (Vercel) installe "
+            "aussi nos catalogues : repos privés en SSH, GitLab, chemins locaux, "
+            "structure par domaines. La différence est dans le modèle. Eux : une "
+            "CLI, des add successifs, un skills-lock.json qui retient le ref "
+            "(souvent un tag) et un hash du contenu ; le déclaratif existe, en "
+            "expérimental, dans le package.json. Nous : un pollen.yaml façon "
+            ".pre-commit-config.yaml, à la racine de n'importe quel repo, "
+            "Terraform, Python ou Java, sans package.json dans un repo qui n'a "
+            "rien à voir avec npm. Chaque source est épinglée sur le commit d'une "
+            "release, outdated part du dernier tag, et la montée de version se "
+            "relit en PR. Eux sont bien plus larges ; nous, plus stricts pour une "
+            "équipe. Les deux installent les mêmes skills : aucun lock-in."
         ),
     },
     {
@@ -559,10 +596,7 @@ SLIDES = [
         "kicker": "Sans gouvernance, on recrée le monolithe… éclaté en N fichiers.",
         "bees": [("bee_grad.png", 11.8, 0.2, 1.15, 6)],
         "notes": (
-            "War story : un skill Terragrunt référençait run-all, remplacé par "
-            "run --all. Péremption factuelle, parfaite pour un scan IA. La "
-            "péremption de jugement — est-ce encore notre convention ? — reste "
-            "humaine. Qui relit ? Les skills transverses (Docker, CI, IaC, "
+            "Qui relit ? Les skills transverses (Docker, CI, IaC, "
             "commits…) : les référents tech, Guillaume et moi, qui les avons "
             "posés au départ. Un skill spécialisé, comme celui de l'API Solis, "
             "est porté par les référents du domaine : Iliass, chercheur, qui "
@@ -574,6 +608,34 @@ SLIDES = [
             "platform, les repos spécialisés par le référent de leur domaine. "
             "Toujours une PR, jamais relue par son "
             "seul auteur, et la CI vérifie le mécanique."
+        ),
+    },
+    {
+        "type": "bullets",
+        "title": "Quand un skill périme",
+        "bullets": [
+            "Séparer le durable (archi) du volatil (flags, versions)",
+            "L'agent se trompe : on corrige le skill, pas que le code",
+            "Une règle qui peut devenir un check le devient",
+            "Scan IA : bon sur le factuel, le jugement reste humain",
+            "Prochaine marche : des evals, pas encore en place",
+        ],
+        "kicker": "Une règle périmée n'échoue pas : elle enseigne le mauvais pattern.",
+        "bees": [("bee_grad.png", 11.8, 0.2, 1.15, -6)],
+        "notes": (
+            "Le vrai risque d'une lib de skills, c'est la règle périmée : elle ne "
+            "casse rien, elle apprend en silence le mauvais pattern à l'agent. "
+            "Ce qui pourrit, c'est le volatil : flags, versions, commandes. On "
+            "l'isole du durable. War story : un skill Terragrunt référençait "
+            "run-all, remplacé par run --all. Péremption factuelle, parfaite "
+            "pour un scan IA. La péremption de jugement — est-ce encore notre "
+            "convention ? — reste humaine, en revue. Quand une règle est "
+            "mécanique, on en fait un check qui casse fort : le hook commit-msg "
+            "qui refuse les co-auteurs IA, skill-validator sur chaque skill en "
+            "CI. Ce qu'on n'a pas encore : des evals, un prompt de référence "
+            "rejoué avec le skill pour prouver qu'il produit toujours le bon "
+            "résultat. C'est notre démo avec et sans skills, automatisée. On va "
+            "commencer par quelques skills mécaniques, Docker et commits."
         ),
     },
     {

@@ -176,7 +176,14 @@ partagé → skills modulaires → sync global → skills par projet.
   `_bmad/custom/`). Positionnement retenu : « même format SKILL.md, autre
   contenu : ils se composent » (slide « Et Spec Kit, BMAD ? »). Chacun a sa
   CLI de distribution par projet → même problème que skillmgr.
-- **Concurrence / prior art** : `npx skills` (Vercel, lockfile `skills-lock.json`),
+- **Concurrence / prior art** : `npx skills` (Vercel, vérifié dans le code le
+  22/10/2026) : CLI Node, `add owner/repo#ref` (branche, tag ou SHA), repos
+  privés SSH, GitLab, chemins locaux, catalogues par domaines ;
+  `skills-lock.json` retient le **ref** + un hash du contenu (pas le commit) ;
+  déclaratif en expérimental (tableau `skills` du `package.json` +
+  `experimental_sync`). Différence pollen : `pollen.yaml` déclaratif façon
+  pre-commit, neutre côté langage, épinglé sur le commit d'une release,
+  `outdated` / `autoupdate`, `validate` (slide « Et npx skills ? »). Aussi :
   plugins Claude Code déclarés par projet (`enabledPlugins` /
   `extraKnownMarketplaces` dans `.claude/settings.json`).
 - **Google** (blog « Behind the scenes: how we build, test and scale Google agent

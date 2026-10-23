@@ -52,6 +52,8 @@ SLIDES = [
                     "Docker Captain",
                 ],
                 "badges": [("badge_gde.png", 0.38), ("badge_docker_captain.png", 0.7)],
+                # Supporter du PSG : sticker en coin de carte.
+                "sticker": ("badge_psg.png", 0.95, 12),
             },
             {
                 "name": "Guillaume Leroy",
@@ -74,6 +76,16 @@ SLIDES = [
             "Mazlum : Head of Data chez GroupBees, GDE Cloud et Docker Captain. "
             "Guillaume : Platform Engineer & SRE chez GroupBees, fondateur de "
             "THEREALM, et formateur à EPITECH et Polytech."
+        ),
+    },
+    {
+        "type": "image",
+        "title": "En direct du TechCast",
+        "image_path": "assets/jt_satirique.jpg",
+        "notes": (
+            "Clin d'œil façon Guignols de l'info, on ne s'y attarde pas : "
+            "« Comment GroupBees a standardisé ses conventions avec les Agent "
+            "Skills ? C'est notre sujet. »"
         ),
     },
     # ── Contexte GroupBees ──────────────────────────────────────────────────
@@ -682,7 +694,7 @@ SLIDES = [
     },
     {
         "type": "bullets",
-        "title": "Ce qu'on retient de Google",
+        "title": "Comment fait Google ?",
         "bullets": [
             "« Skills are products, not snippets »",
             "Evals obligatoires à la soumission : prompts + grille de score",

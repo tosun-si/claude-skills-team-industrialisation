@@ -415,6 +415,12 @@ def render_speakers(prs, data):
                            top=by + (Inches(0.7) - Inches(h)) // 2, height=Inches(h))
             if pic is not None:
                 bx += pic.width + Inches(0.35)
+        if sp.get("sticker"):                    # tilted on the card's top-right corner
+            name, h, rot = sp["sticker"]
+            pic = _picture(slide, name, left=x + card_w - Inches(h * 0.75),
+                           top=top - Inches(h * 0.3), height=Inches(h))
+            if pic is not None:
+                pic.rotation = rot
     _notes(slide, data.get("notes"))
 
 

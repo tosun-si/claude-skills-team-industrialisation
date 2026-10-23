@@ -185,6 +185,12 @@ def _notes(slide, notes):
         slide.notes_slide.notes_text_frame.text = notes
 
 
+def _cue(slide, cue):
+    """Put the stage cue (who speaks, hand-over) above the slide's notes."""
+    tf = slide.notes_slide.notes_text_frame
+    tf.text = f"{cue}\n\n────────\n{tf.text}" if tf.text else cue
+
+
 def _bullet_hex(slide, y, i):
     """Small alternating cyan/purple hexagon used as a bullet marker."""
     color = CYAN if i % 2 == 0 else PURPLE
@@ -608,11 +614,17 @@ def build_presentation() -> Presentation:
     prs.slide_width = SLIDE_W
     prs.slide_height = SLIDE_H
     total = len(SLIDES)
+    cues = getattr(slides_content, "CUES", {})
+    unknown = set(cues) - {data.get("title") for data in SLIDES}
+    if unknown:
+        raise ValueError(f"CUES for unknown slide titles: {sorted(unknown)}")
     for i, data in enumerate(SLIDES):
         renderer = RENDERERS.get(data["type"])
         if renderer is None:
             raise ValueError(f"Slide {i + 1}: unknown type {data['type']!r}")
         renderer(prs, data)
+        if cues.get(data.get("title")):
+            _cue(prs.slides[i], cues[data["title"]])
         _bees(prs.slides[i], data)
         _footer(prs.slides[i], i, total - 1, dark=data["type"] in DARK_TYPES)
         if getattr(slides_content, "TRANSITION", True):

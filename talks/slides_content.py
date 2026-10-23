@@ -739,3 +739,194 @@ SLIDES = [
         "notes": "Merci ! On prend vos questions.",
     },
 ]
+
+# Repères de scène, en tête des notes : qui parle, les points à ne pas
+# oublier, la phrase qui passe le relais. Indexés par titre de slide ; le
+# dialogue complet, pour les répétitions, est dans ../dialogue.md.
+CUES = {
+    "Industrialiser l'IA\nen équipe": (
+        "🎤 Mazlum, puis Guillaume\n"
+        "• Générer du code avec une IA : trivial. Comme l'équipe l'attend : autre histoire.\n"
+        "↪ Guillaume : « Et c'est cette histoire-là qu'on vient vous raconter. »"
+    ),
+    "Qui sommes-nous ?": (
+        "🎤 Chacun présente l'autre\n"
+        "• Mazlum présente Guillaume (« m'empêche de mettre en prod le vendredi »)\n"
+        "• Guillaume présente Mazlum (« écrit les règles… et les oublie dans son Dockerfile »)\n"
+        "↪ Mazlum : « C'est exactement le sujet du talk. »"
+    ),
+    "En direct du TechCast": (
+        "🎤 Les deux, 10 secondes\n"
+        "• Clin d'œil, on ne s'attarde pas : on lit le bandeau\n"
+        "↪ Mazlum enchaîne sur le contexte GroupBees"
+    ),
+    "Le contexte : une plateforme d'API": (
+        "🎤 Mazlum\n"
+        "• Registre d'API : producteurs publient, consommateurs découvrent, IA par-dessus\n"
+        "• Stack exigeante : hexagonal, Terragrunt, Workload Identity, IAP\n"
+        "↪ « Et derrière, une équipe qui n'a pas le même niveau sur tout ça. Guillaume ? »"
+    ),
+    "L'équipe": (
+        "🎤 Guillaume\n"
+        "• 8 personnes : quelques seniors, un junior, un stagiaire\n"
+        "• Grâce à Claude, tout le monde fait évoluer les stacks : la bonne nouvelle\n"
+        "↪ Mazlum : « La mauvaise, c'est la suite. »"
+    ),
+    "Le problème : ça diverge": (
+        "🎤 Mazlum\n"
+        "• Nouveau service, nouvelle stack IaC → nos conventions disparaissent\n"
+        "• Chacun son Claude, son CLAUDE.md : l'IA ne connaît pas NOS règles\n"
+        "↪ Guillaume : « Donc on a fait ce que tout le monde fait. »"
+    ),
+    "Première idée : un CLAUDE.md commun": (
+        "🎤 Guillaume\n"
+        "• Un CLAUDE.md partagé, toutes les règles au même endroit\n"
+        "↪ Mazlum : « Simple… pendant deux semaines. »"
+    ),
+    "Le CLAUDE.md qui grossit": (
+        "🎤 Guillaume (montrer le vrai fichier qui scrolle)\n"
+        "• Chargé tout le temps : un commit relit les règles Dockerfile\n"
+        "• Coûte des tokens, dilue l'attention\n"
+        "↪ Mazlum : « Alors on l'a découpé. »"
+    ),
+    "Du monolithe aux modules : les skills": (
+        "🎤 Mazlum\n"
+        "• Un skill = un CLAUDE.md modulaire, chargé à la demande\n"
+        "• Une convention, un skill"
+    ),
+    "Anatomie d'un skill": (
+        "🎤 Mazlum\n"
+        "• Un dossier, un SKILL.md, standard Agent Skills\n"
+        "• La description est toujours vue ; le corps, seulement si la tâche correspond\n"
+        "↪ Guillaume : « Et un skill, ce n'est pas que du texte. »"
+    ),
+    "Un skill, c'est un dossier": (
+        "🎤 Guillaume\n"
+        "• references/ : lu à la demande · assets/ : fichiers à copier · scripts/ : contrôles\n"
+        "↪ Mazlum : « Ce qui ne veut pas dire qu'on jette le CLAUDE.md. »"
+    ),
+    "CLAUDE.md monolithe vs skills": (
+        "🎤 Mazlum\n"
+        "• CLAUDE.md redevient le contexte durable du projet (AGENTS.md + pont d'une ligne)\n"
+        "• Les conventions vivent dans les skills"
+    ),
+    "Modulariser : des domaines qui se composent": (
+        "🎤 Guillaume\n"
+        "• Docker générique + Python par-dessus, qui n'ajoute que le spécifique\n"
+        "↪ Mazlum : « Restait à les partager dans l'équipe. »"
+    ),
+    "Partager : un catalogue synchronisé en global": (
+        "🎤 Guillaume\n"
+        "• Un repo git de skills, synchronisé sur la machine de chaque dev"
+    ),
+    "Un module de skills, synchronisé en global": (
+        "🎤 Guillaume\n"
+        "• Script → dossiers perso des agents ; plusieurs modules ; version = tag git\n"
+        "↪ Mazlum : « … jusqu'à ce que je l'utilise chez un client. »"
+    ),
+    "Global : la limite": (
+        "🎤 Mazlum\n"
+        "• En global, nos règles s'appliquent partout : perso, clients\n"
+        "• On veut choisir, projet par projet\n"
+        "↪ Guillaume : « Et choisir des skills par projet, c'est gérer des dépendances. »"
+    ),
+    "Par projet : un gestionnaire de skills": (
+        "🎤 Guillaume\n"
+        "• On importe les skills comme des dépendances, + les skills du projet\n"
+        "• La factory accueillera d'autres projets que Solis\n"
+        "↪ Mazlum : « À une condition : ne rien inventer de propriétaire. »"
+    ),
+    "S'appuyer sur les standards": (
+        "🎤 Mazlum\n"
+        "• Agent Skills : Claude Code, Copilot, Cursor, Codex, Antigravity CLI\n"
+        "• AGENTS.md pour le contexte ; on change d'agent, les skills restent\n"
+        "↪ « Il manquait l'outil pour les installer. Guillaume, raconte-leur pollen. »"
+    ),
+    "pollen : les skills comme des dépendances": (
+        "🎤 Guillaume\n"
+        "• CLI open source en Rust, pollen.yaml façon pre-commit\n"
+        "• update : installe, rafraîchit, supprime ce qu'on a retiré"
+    ),
+    "pollen, en pratique": (
+        "🎤 Guillaume\n"
+        "• Périmètre étroit : déplace des dossiers, valide la spec\n"
+        "• Un skill écrit à la main n'est jamais écrasé\n"
+        "↪ Mazlum : « Et la question à chaque fois : où est le lockfile ? »"
+    ),
+    "Épingler un commit… et pas de lockfile": (
+        "🎤 Guillaume\n"
+        "• Pas de résolveur → pas de lockfile : le SHA épinglé EST le lock\n"
+        "• outdated → autoupdate → PR\n"
+        "↪ Mazlum : « Et l'autre question, sous mon post LinkedIn : pourquoi pas npx skills ? »"
+    ),
+    "Et npx skills ?": (
+        "🎤 Mazlum, puis Guillaume, Mazlum conclut\n"
+        "• Mazlum : super outil, bien plus large, sait installer nos catalogues privés\n"
+        "• Guillaume : CLI + lock vs fichier déclaratif, sans package.json, épinglé sur une release\n"
+        "• Mazlum : les deux installent les mêmes skills, aucun lock-in"
+    ),
+    "Un fichier, trois propriétaires": (
+        "🎤 Mazlum\n"
+        "• Ma vraie config : modules de l'orga (privés + publics), skill pollen, module perso\n"
+        "• Les règles de l'équipe et les miennes se composent sans se mélanger\n"
+        "↪ Guillaume : « Et on nous demande aussi : vous réinventez Spec Kit ? »"
+    ),
+    "Et Spec Kit, BMAD ?": (
+        "🎤 Guillaume\n"
+        "• Eux aussi en Agent Skills, mais ils encodent un processus (spec → plan → tâches)\n"
+        "• Nous, des conventions techniques : ils se composent\n"
+        "↪ Mazlum : « Assez parlé. Montrons-le. »"
+    ),
+    "Même prompt, sans puis avec les skills": (
+        "🎤 Démo, on alterne (script-demo.md) · le non-pilote décide de basculer sur les filets\n"
+        "0 · Cadrage : Mazlum parle\n"
+        "1 · SANS : Mazlum pilote, Guillaume commente (1 stage root, citation sans auteur)\n"
+        "2 · pollen update : Guillaume pilote, Mazlum commente (quote-domain)\n"
+        "3 · AVEC : Guillaume pilote, Mazlum commente (3 couches, non-root, ?lang=fr)\n"
+        "4 · Delta : ping-pong, une paire chacun → « Les règles sont là. »\n"
+        "5 · Déploiement : Guillaume pilote, Mazlum commente\n"
+        "↪ Guillaume : « Une bibliothèque de skills, ça se gouverne. »"
+    ),
+    "Une lib de skills, ça se gouverne": (
+        "🎤 Mazlum\n"
+        "• Skills = code : versionnés, relus en PR, blast radius énorme\n"
+        "• Transverses : Guillaume et moi · Domaine : ceux qui le connaissent · « On est huit, pas Google »\n"
+        "↪ Guillaume : « Et même relu, un skill finit par vieillir. »"
+    ),
+    "Quand un skill périme": (
+        "🎤 Guillaume, Mazlum, Guillaume\n"
+        "• Une règle périmée n'échoue pas : elle apprend le mauvais pattern (run-all → run --all)\n"
+        "• Mazlum : le factuel, un agent le repère ; « encore notre convention ? » reste humain\n"
+        "• Guillaume : une règle qui peut devenir un check en devient un"
+    ),
+    "La CI d'un module de skills": (
+        "🎤 Guillaume\n"
+        "• skill-validator : spec, liens, orphelins, taille\n"
+        "• Workflow partagé épinglé par SHA, Dependabot\n"
+        "↪ Mazlum : « Et on a appris une chose en route. »"
+    ),
+    "La doc d'un outil est aussi un skill": (
+        "🎤 Mazlum\n"
+        "• 1re montée de version de pollen : 13 fichiers à retoucher\n"
+        "• Désormais, la connaissance de pollen est un skill livré avec pollen\n"
+        "↪ Guillaume : « Et pour aller plus loin, on a regardé chez les gros. »"
+    ),
+    "Comment fait Google ?": (
+        "🎤 Mazlum\n"
+        "• « Skills are products, not snippets » ; evals obligatoires et hebdo, multi-agents\n"
+        "• Notre prochaine marche : les evals\n"
+        "• Adaptez la gouvernance à votre taille, mais gardez-en une"
+    ),
+    "À retenir": (
+        "🎤 Un point chacun\n"
+        "• Mazlum : conventions dans des skills, pas un CLAUDE.md géant\n"
+        "• Guillaume : skills par projet, épinglés comme des dépendances\n"
+        "• Mazlum : gouvernés comme du code · Guillaume : « relecture, CI… et bientôt des evals »"
+    ),
+    "Pas par magie.": (
+        "🎤 Les deux\n"
+        "• Mazlum : « Ce n'est pas par magie que l'IA a codé comme nous. »\n"
+        "• Guillaume : « C'est parce que les règles sont là. »\n"
+        "• Mazlum : « Merci ! On prend vos questions. »"
+    ),
+}

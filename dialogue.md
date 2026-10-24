@@ -14,7 +14,6 @@ façon. Les notes de chaque slide gardent le fond, sous un repère de scène con
   Guillaume porte l'outillage (sync, pollen, CI) et la fiabilité.
 - Pendant la démo, l'un pilote le clavier, l'autre commente pour la salle. On
   inverse à chaque beat.
-- `[à confirmer]` = un fait à vérifier ensemble avant de le dire sur scène.
 
 | Bloc | Slides | Qui |
 |---|---|---|
@@ -68,8 +67,7 @@ façon. Les notes de chaque slide gardent le fond, sous un repère de scène con
 > **Mazlum** : Chez GroupBees, on construit une plateforme de registre d'API :
 > des producteurs publient leurs API, des consommateurs les découvrent, et de
 > l'IA par-dessus pour générer. La stack est moderne mais exigeante : archi
-> hexagonale, Terragrunt, Workload Identity, IAP. `[à confirmer : une phrase
-> sur ce que l'IA génère sur la plateforme]`
+> hexagonale, Terragrunt, Workload Identity, IAP.
 >
 > **Mazlum** (relais) : Et derrière, une équipe qui n'a pas le même niveau sur
 > tout ça. Guillaume ?
@@ -230,9 +228,7 @@ façon. Les notes de chaque slide gardent le fond, sous un repère de scène con
 > **Guillaume** : La différence est dans le modèle. Eux : une CLI qui trace ce
 > qu'on a installé dans un lockfile. Nous : un fichier déclaratif façon
 > pre-commit, à la racine de n'importe quel repo, Terraform ou Python, sans
-> package.json. Et épinglé sur le commit d'une release. `[à confirmer :
-> Guillaume avait fait l'état de l'art avant de démarrer pollen, à raconter en
-> une phrase]`
+> package.json. Et épinglé sur le commit d'une release.
 >
 > **Mazlum** : Et les deux installent les mêmes skills. Aucun lock-in.
 

@@ -862,6 +862,7 @@ CUES = {
     "Et npx skills ?": (
         "🎤 Mazlum, puis Guillaume, Mazlum conclut\n"
         "• Mazlum : super outil, bien plus large, sait installer nos catalogues privés\n"
+        "• Guillaume : avant pollen, seul outil open source trouvé, on l'a regardé\n"
         "• Guillaume : CLI + lock vs fichier déclaratif, sans package.json, épinglé sur une release\n"
         "• Mazlum : les deux installent les mêmes skills, aucun lock-in"
     ),

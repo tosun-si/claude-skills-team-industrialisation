@@ -225,8 +225,10 @@ façon. Les notes de chaque slide gardent le fond, sous un repère de scène con
 > **Mazlum** : npx skills, de Vercel, est un super outil, bien plus large que le
 > nôtre. Et il sait installer nos catalogues privés aussi.
 >
-> **Guillaume** : La différence est dans le modèle. Eux : une CLI qui trace ce
-> qu'on a installé dans un lockfile. Nous : un fichier déclaratif façon
+> **Guillaume** : Quand j'ai cherché ce qui existait en open source pour
+> installer des skills, il n'y avait que celui-là. On l'a regardé, et la
+> différence est dans le modèle. Eux : une CLI qui trace ce qu'on a installé
+> dans un lockfile. Nous : un fichier déclaratif façon
 > pre-commit, à la racine de n'importe quel repo, Terraform ou Python, sans
 > package.json. Et épinglé sur le commit d'une release.
 >

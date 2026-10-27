@@ -89,9 +89,9 @@ suffisent, et la génération est plus courte.
 | 1 | 84 s, 18 fichiers | 3 min 20, 37 fichiers |
 | 2 | 80 s, 19 fichiers | 2 min 39, 41 fichiers |
 
-Environ 1 $ par exécution AVEC (40 à 50 tours). Sur scène, lancer AVEC dès
-le début du Beat 1, en parallèle de SANS : les deux finissent pendant le
-commentaire du Beat 2.
+Environ 1 $ par exécution AVEC (40 à 50 tours). Sur scène, enchaîner sans
+attendre : lancer SANS, faire `pollen update` à droite pendant qu'il génère,
+lancer AVEC, puis commenter la sortie SANS pendant qu'AVEC tourne.
 
 ## Après la génération (pas de déploiement en live)
 

@@ -583,15 +583,16 @@ SLIDES = [
         "steps": [
             "Session vierge : le prompt, la sortie générique",
             "pollen update : les skills du projet arrivent",
-            "Même prompt : hexagonal, Dockerfile, tests, CI",
-            "Commit squashé, PR labellisée, pipeline jusqu'à Cloud Run",
+            "Même prompt : uv, hexagonal, Dockerfile, tests, CI, AGENTS.md",
+            "Le delta, puis une vraie release : tag, PR labellisées, notes",
         ],
         "notes": (
             "Session vierge = terminal gauche : claude --safe-mode "
             "--disable-slash-commands (ni CLAUDE.md, ni skills, même les "
             "built-in). Le moment clé, c'est le contraste. Ce ne sont pas les talents de "
-            "l'IA qui font la différence, ce sont les règles. Filets : URL déjà "
-            "déployée + screencast."
+            "l'IA qui font la différence, ce sont les règles. Pas de déploiement "
+            "en live : une vraie release déjà publiée, dans le navigateur. Filets : "
+            "sorties pré-capturées + screencast."
         ),
     },
     # ── Gouvernance ─────────────────────────────────────────────────────────
@@ -881,11 +882,12 @@ CUES = {
     "Même prompt, sans puis avec les skills": (
         "🎤 Démo, on alterne (script-demo.md) · le non-pilote décide de basculer sur les filets\n"
         "0 · Cadrage : Mazlum parle\n"
-        "1 · SANS : Mazlum pilote, Guillaume commente (1 stage root, citation sans auteur)\n"
-        "2 · pollen update : Guillaume pilote, Mazlum commente (quote-domain)\n"
-        "3 · AVEC : Guillaume pilote, Mazlum commente (3 couches, non-root, ?lang=fr)\n"
-        "4 · Delta : ping-pong, une paire chacun → « Les règles sont là. »\n"
-        "5 · Déploiement : Guillaume pilote, Mazlum commente\n"
+        "1 · Lancer SANS : Mazlum pilote, Guillaume commente\n"
+        "2 · pollen update + lancer AVEC : Guillaume pilote, Mazlum commente (quote-domain)\n"
+        "3 · Sortie SANS : pip, 1 stage, GetRandomQuote, README seul (PAS « root » ni « sans auteur »)\n"
+        "4 · Sortie AVEC : 3 couches, UseCase, uv multi-stage, AGENTS.md, ?lang=fr\n"
+        "5 · Delta : ping-pong → « Les règles sont là. »\n"
+        "6 · Release dans le navigateur : Mazlum pilote, Guillaume commente\n"
         "↪ Guillaume : « Une bibliothèque de skills, ça se gouverne. »"
     ),
     "Une lib de skills, ça se gouverne": (

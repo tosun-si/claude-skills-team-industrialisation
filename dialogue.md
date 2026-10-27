@@ -251,10 +251,11 @@ façon. Les notes de chaque slide gardent le fond, sous un repère de scène con
 
 ---
 
-## Démo (≈ 13 min, voir `script-demo.md`)
+## Démo (≈ 10 min, voir `script-demo.md`)
 
 Deux terminaux côte à côte : SANS à gauche, AVEC à droite. Celui qui pilote ne
-commente pas, l'autre raconte pour la salle.
+commente pas, l'autre raconte pour la salle. On enchaîne sans attendre : SANS
+génère pendant `pollen update`, AVEC génère pendant qu'on commente SANS.
 
 ### 25 · Même prompt, sans puis avec les skills
 
@@ -263,56 +264,69 @@ commente pas, l'autre raconte pour la salle.
 > **Mazlum** : Même idée, même prompt, deux fois. Une fois sans nos skills, une
 > fois avec. Regardez la différence.
 
-**Beat 1 · SANS skills (≈ 2 min 30)** — *Mazlum pilote, Guillaume commente*
+**Beat 1 · On lance SANS (30 s)** — *Mazlum pilote, Guillaume commente*
 
-> **Guillaume** : Mazlum lance une session vierge : pas de CLAUDE.md, pas de
-> skills. Il colle le prompt… *(pendant la génération)* Ça tourne, c'est propre…
-> Dockerfile en un seul stage, en root. Une citation sans auteur ni langue.
+> **Guillaume** : À gauche, Mazlum lance une session vierge : pas de CLAUDE.md,
+> pas de skills. Il colle le prompt. Petit service hexagonal, un Dockerfile,
+> une CI vers Cloud Run, de la doc. Aucune convention dans le prompt, aucun
+> outil imposé, même pas pip ou uv.
+
+**Beat 2 · pollen charge les skills, on lance AVEC (≈ 1 min 30)** — *Guillaume pilote, Mazlum commente*
+
+> **Mazlum** : Pendant que ça tourne, à droite, Guillaume est dans le projet.
+> Le projet déclare ses skills dans `pollen.yaml`… et le dossier des skills est
+> vide.
+>
+> **Guillaume** : `pollen update`. *(défilement)* Seize skills, dont celui-là :
+> `quote-domain`. Il n'existe que dans ce projet : les règles métier de l'app.
+> *(il lance `claude` et colle le même prompt)*
+
+**Beat 3 · La sortie SANS (≈ 2 min)** — *Mazlum pilote, Guillaume commente*
+
+> **Guillaume** : SANS a fini. Regardez : c'est propre, il a même fait de
+> l'hexagonal à sa façon. Mais `requirements.txt` et pip. Un Dockerfile en un
+> seul stage. Un `GetRandomQuote` posé où il veut. Des tests au fil de l'eau.
+> Un README, et c'est tout.
 >
 > **Mazlum** : C'est correct. Ça marche. Mais ce n'est pas comme NOUS, on code.
 
-**Beat 2 · pollen charge les skills (≈ 2 min)** — *Guillaume pilote, Mazlum commente*
+**Beat 4 · La sortie AVEC (≈ 2 min 30)** — *Guillaume pilote, Mazlum commente*
 
-> **Mazlum** : À droite, Guillaume est dans le projet. Le projet déclare ses
-> skills dans `pollen.yaml`… et le dossier des skills est vide.
+> **Mazlum** : Même prompt, au caractère près. Regardez l'arbo : domain,
+> application, infrastructure. `GetRandomQuoteUseCase`, dans sa couche. uv, et
+> un Dockerfile multi-stage : uv dans le builder, pas dans l'image finale.
 >
-> **Guillaume** : `pollen update`. *(défilement)* Quinze skills, dont celui-là :
-> `quote-domain`. Il n'existe que dans ce projet : les règles métier de l'app.
+> **Guillaume** : Et des fichiers que le prompt ne demandait pas : `AGENTS.md`,
+> et un `CLAUDE.md` d'une ligne qui pointe dessus. Le prochain agent qui ouvre
+> ce repo sait où il est. Et `quote.py` : auteur obligatoire, 280 caractères
+> maximum, une langue, `?lang=fr`. Ça vient du skill du projet.
 
-**Beat 3 · AVEC skills (≈ 4 min)** — *Guillaume pilote, Mazlum commente*
+**Beat 5 · Le delta (≈ 1 min 30, climax)** — *ping-pong, une paire chacun*
 
-> **Mazlum** : Même prompt, au caractère près. *(pendant la génération)*
-> Regardez l'arbo : domain, application, infrastructure. Le Dockerfile :
-> multi-stage, non-root.
+> **Mazlum** : Dépendances : pip, contre uv.
 >
-> **Guillaume** : Et `quote.py` : auteur obligatoire, 280 caractères maximum, une
-> langue, et `?lang=fr`. Le prompt n'en parlait pas : ça vient du skill du
-> projet.
+> **Guillaume** : Dockerfile : un stage, contre multi-stage.
+>
+> **Mazlum** : Archi : à sa façon, contre nos trois couches et nos UseCase.
+>
+> **Guillaume** : Tests : au fil de l'eau, contre Given-When-Then.
+>
+> **Mazlum** : Doc : un README, contre README, AGENTS.md et CLAUDE.md.
+>
+> **Guillaume** : L'IA n'est pas devenue meilleure entre les deux.
+>
+> **Mazlum** : Les règles sont là.
 
-**Beat 4 · Le delta (≈ 2 min 30, climax)** — *ping-pong, une paire chacun*
+**Beat 6 · Jusqu'à la release (≈ 1 min)** — *Mazlum pilote le navigateur, Guillaume commente*
 
-> **Mazlum** : Dockerfile : un stage en root, contre multi-stage non-root.
->
-> **Guillaume** : Arbo : à plat, contre trois couches.
->
-> **Mazlum** : Le modèle : un texte, contre texte, auteur et langue validés.
->
-> **Guillaume** : Commit et PR : génériques, contre nos conventions.
->
-> **Mazlum** : L'IA n'est pas devenue meilleure entre les deux.
->
-> **Guillaume** : Les règles sont là.
+> **Guillaume** : On ne va pas pousser en live, mais voilà où ça mène. Une vraie
+> release : un tag, et des release notes rangées toutes seules par catégorie.
+> Parce que chaque PR a un titre et un label à nos conventions. Ça aussi, ce
+> sont des skills.
 
-**Beat 5 · Déploiement, la cerise (≈ 2 min)** — *Guillaume pilote, Mazlum commente*
-
-> **Guillaume** : La pipeline GitHub Actions est verte… `/quote?lang=fr`.
->
-> **Mazlum** : Une citation en français, avec son auteur. De l'idée à l'URL en
-> prod, aux conventions de l'équipe.
-
-**Filets** : génération trop lente → sorties pré-capturées ou branche
-`reference` ; pipeline KO → l'URL est déjà ouverte. Celui qui ne pilote pas
-décide de basculer, pour que celui qui pilote reste concentré.
+**Filets** : génération trop lente → sorties pré-capturées ; réseau KO →
+screencast. Celui qui ne pilote pas décide de basculer, pour que celui qui
+pilote reste concentré.
 
 > **Guillaume** (sortie de démo) : Mais une bibliothèque de skills, ça se
 > gouverne. Sinon, on recrée le monolithe qu'on a fui.

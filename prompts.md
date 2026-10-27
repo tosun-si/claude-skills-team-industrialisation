@@ -35,17 +35,23 @@ fichier de plus, et la preuve la plus visible du contraste.
 | Lancement | `claude --safe-mode --disable-slash-commands` | `pollen update`, puis `claude` |
 | Contexte | rien : ni CLAUDE.md, ni skills | `pollen.yaml` + `.skills/quote-domain` |
 
-## Le delta attendu (Beat 4)
+## Le delta (Beat 4), mesuré sur 3 exécutions
 
-| | SANS (attendu) | AVEC (skill qui l'apporte) |
+Stable d'une exécution à l'autre, des deux côtés.
+
+| | SANS | AVEC (skill qui l'apporte) |
 |---|---|---|
 | Dépendances | `requirements.txt` + pip | `pyproject.toml` + `uv.lock` (`python-uv-direnv`) |
-| Dockerfile | un stage, `pip install` (déjà non-root au 1er test : `USER nobody`) | multi-stage, uv dans le builder seulement, runtime sans uv, `ENTRYPOINT`/`CMD` séparés (`python-docker-multistage`) |
-| Archi | hexa « à sa façon » : `GetRandomQuote`, tout dans `domain.py` | `domain/application/infrastructure`, `*UseCase`, composition root (`python-hexagonal-clean-archi`) |
-| Test | pytest au fil de l'eau | `Test<X>`, `test_given_…_when_…_then_…`, fake en `conftest` (`unit-test-given-when-then`) |
-| CI | pip + pytest, déploiement `--source .` (déjà en WIF au 1er test) | uv, ruff, ty, Docker Bake vers Artifact Registry, `deploy-cloudrun` (`cloud-run-cicd-gha`) |
-| Doc | `README.md` | `README.md` + `AGENTS.md` + `CLAUDE.md` d'une ligne (`agents-md-manager`) |
+| Dockerfile | un stage, `pip install`, `CMD sh -c` | multi-stage, uv dans le builder seulement, runtime sans uv (`python-docker-multistage`) |
+| Archi | `app/domain`, `application`, `adapters` à sa façon : `GetRandomQuote` | `domain/application/infrastructure`, `GetRandomQuoteUseCase`, ports, DTO, composition root (`python-hexagonal-clean-archi`) |
+| Test | `test_returns_…`, un fichier | `TestGetRandomQuoteUseCase`, `test_given_…_when_…_then_…`, fake en `conftest`, unit + integration (`unit-test-given-when-then`) |
+| CI | pip + pytest, déploiement `--source .` | uv, ruff, ty, Docker Bake vers Artifact Registry (`cloud-run-cicd-gha`) |
+| Doc | `README.md` | `README.md` + `AGENTS.md` + `CLAUDE.md` = `@AGENTS.md` (`agents-md-manager`) |
 | Citation | `{text, author}` | `text` ≤ 280, `author` obligatoire, `lang`, `?lang=fr` (`quote-domain`, skill du projet) |
+
+**Ne pas dire sur scène** : « en root », « sans auteur », « clé JSON ». Côté
+SANS, l'agent met déjà un `USER` non-root, un auteur et WIF : ce ne sont plus
+des différences.
 
 ## Mise en place côté AVEC (une fois, avant les répétitions)
 
@@ -54,7 +60,7 @@ fichier de plus, et la preuve la plus visible du contraste.
 ```yaml
 repos:
   - repo: git@github.com:groupbees/skills-core.git   # private: SSH
-    revision: <sha>  # v0.3.2 (à publier : hexagonal-flat + déclencheurs agents-md-manager)
+    revision: 0ada6eff527bad1c81078c6c8b9bc0de3e9bcd34  # v0.4.0
     paths:
       - path: skills/python
       - path: skills/docker
@@ -78,8 +84,14 @@ suffisent, et la génération est plus courte.
 
 ## Durée mesurée
 
-Premier test (prompt avec « peu de fichiers ») : SANS 75 s, AVEC 3 min 07.
-Sur scène, lancer AVEC dès le début du Beat 1, en parallèle de SANS.
+| Exécution | SANS | AVEC |
+|---|---|---|
+| 1 | 84 s, 18 fichiers | 3 min 20, 37 fichiers |
+| 2 | 80 s, 19 fichiers | 2 min 39, 41 fichiers |
+
+Environ 1 $ par exécution AVEC (40 à 50 tours). Sur scène, lancer AVEC dès
+le début du Beat 1, en parallèle de SANS : les deux finissent pendant le
+commentaire du Beat 2.
 
 ## Après la génération (pas de déploiement en live)
 

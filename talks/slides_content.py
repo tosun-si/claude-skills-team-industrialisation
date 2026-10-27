@@ -854,7 +854,7 @@ CUES = {
         "↪ Mazlum : « Et la question à chaque fois : où est le lockfile ? »"
     ),
     "Épingler un commit… et pas de lockfile": (
-        "🎤 Guillaume\n"
+        "🎤 Mazlum\n"
         "• Pas de résolveur → pas de lockfile : le SHA épinglé EST le lock\n"
         "• outdated → autoupdate → PR\n"
         "↪ Mazlum : « Et l'autre question, sous mon post LinkedIn : pourquoi pas npx skills ? »"

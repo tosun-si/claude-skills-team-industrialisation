@@ -21,7 +21,7 @@ façon. Les notes de chaque slide gardent le fond, sous un repère de scène con
 | Le problème | 4–6 | Mazlum → Guillaume → Mazlum |
 | Du CLAUDE.md aux skills | 7–13 | Alternance |
 | Partager les skills | 14–18 | Guillaume, puis Mazlum |
-| pollen | 19–24 | Guillaume, Mazlum sur npx skills et sa config |
+| pollen | 19–24 | Guillaume, Mazlum sur le lockfile, npx skills et sa config |
 | Démo | 25 | Alternance par beat |
 | Gouvernance | 26–30 | Mazlum, Guillaume sur la fiabilité |
 | Clôture | 31–32 | Les deux |
@@ -209,16 +209,15 @@ façon. Les notes de chaque slide gardent le fond, sous un repère de scène con
 >
 > **Mazlum** : Et la question qu'on nous pose à chaque fois : où est le lockfile ?
 
-### 21 · Épingler un commit… et pas de lockfile — *Guillaume*
+### 21 · Épingler un commit… et pas de lockfile — *Mazlum*
 
-> **Guillaume** : Il n'y en a pas, volontairement. Un lockfile fige ce qu'un
+> **Mazlum** : Il n'y en a pas, volontairement. Un lockfile fige ce qu'un
 > résolveur a choisi : des plages de versions, des dépendances transitives.
 > pollen n'a ni l'un ni l'autre. Le commit épinglé EST le lock, et le tag en
 > commentaire le rend lisible. `pollen outdated` vous dit qu'une release est
 > sortie, `autoupdate` met à jour le SHA, et ça passe en PR.
 >
-> **Mazlum** : Et l'autre question, sous mon post LinkedIn : pourquoi pas npx
-> skills ?
+> Et l'autre question, sous mon post LinkedIn : pourquoi pas npx skills ?
 
 ### 22 · Et npx skills ? — *Mazlum, Guillaume conclut*
 

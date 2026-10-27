@@ -226,6 +226,8 @@ partagé → skills modulaires → sync global → skills par projet.
    skill projet `.skills/quote-domain` (auteur obligatoire, ≤ 280 car., `lang`
    + `?lang=fr`) = preuve visible du chargement projet. Runbook :
    `script-demo.md`. L'app « citation du jour » est générée en live.
-   ⏭️ Générer l'app de référence (branche `reference`), la déployer.
+   Prompt, delta mesuré et durées dans `prompts.md` (skills-core v0.4.0) ;
+   pas de déploiement en live, la démo finit sur une vraie release.
+   ⏭️ Capturer les sorties SANS / AVEC de référence, choisir la release vitrine.
 4. Screencast happy path + répét' avec panne forcée.
-5. Aligner `deroule.md` sur le nouvel arc narratif (sync global → par projet).
+5. ✅ `deroule.md` aligné sur l'arc narratif et la démo sans déploiement (27/10/2026).

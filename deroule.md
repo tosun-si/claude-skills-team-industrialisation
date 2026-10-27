@@ -1,127 +1,133 @@
 # Déroulé du talk (timé)
 
 **Titre :** *Industrialiser l'IA en équipe : des skills qui encodent vos conventions*
+**Speakers :** Mazlum Tosun & Guillaume Leroy · 32 slides
 
-Conçu pour un **cœur de 35 min + 5–10 min Q&A**. Variantes 30 / 40 min en bas.
-Fil rouge unique : **le savoir d'équipe devient des modules activables** ; les
-artefacts sont des *preuves*, pas le sujet. Climax = le **contraste sans/avec**.
+Créneaux : **DevFest Toulouse ≈ 45 min**, **Cloud Nord ≈ 50 min** (à
+confirmer). Cœur de **≈ 38 min**, le reste en Q&A. Fil rouge unique : **le
+savoir d'équipe devient des modules activables** ; les artefacts sont des
+*preuves*, pas le sujet. Climax = le **contraste sans/avec** de la démo.
 
-| # | Section | Durée | Objectif |
-|---|---|---|---|
-| 1 | Accroche & problème | 4 min | Poser la douleur : l'IA génère du code *générique*, pas VOS conventions — à l'échelle équipe |
-| 2 | Le faux-départ : le `CLAUDE.md` monolithe | 3 min | Échec assumé → besoin de modularité + activation à la demande |
-| 3 | Les skills, c'est quoi | 6 min | Concept, activation à la demande, anatomie (durable vs volatil), 1–2 skills réels |
-| 4 | **DÉMO (le cœur)** | 12 min | 4a contraste (climax), 4b génération end-to-end, 4c déploiement (cerise) |
-| 5 | Gouverner les skills (part d'ombre) | 7 min | Versioning, review, scanner IA, capture à chaud, owners |
-| 6 | Méthodo transposable & clôture | 3 min | Lundi matin, Cursor/Copilot, punchline |
-| — | Q&A | 5–10 min | |
+Qui dit quoi, réplique par réplique : `dialogue.md`. Démo pas à pas :
+`script-demo.md`. Prompt et delta mesuré : `prompts.md`.
+
+| # | Bloc | Slides | Durée | Qui | Objectif |
+|---|---|---|---|---|---|
+| 1 | Ouverture | 1–3 | 2 min | Les deux | Titre, qui on est, le clin d'œil TechCast |
+| 2 | Le problème | 4–6 | 3 min | Mazlum → Guillaume → Mazlum | GroupBees, l'équipe de 8, les nouvelles stacks qui divergent |
+| 3 | Du CLAUDE.md aux skills | 7–13 | 6 min | Alternance | CLAUDE.md partagé qui grossit → skills chargés à la demande, anatomie, domaines composables |
+| 4 | Partager les skills | 14–18 | 4 min | Guillaume, puis Mazlum | Sync global, sa limite, par projet, standards ouverts |
+| 5 | pollen | 19–24 | 6 min | Guillaume, Mazlum sur le lockfile, npx skills et sa config | `pollen.yaml`, pas de lockfile, npx skills, trois propriétaires, Spec Kit / BMAD |
+| 6 | **DÉMO (le cœur)** | 25 | 10 min | Alternance par beat | Même prompt sans / avec skills, delta, release |
+| 7 | Gouvernance | 26–30 | 6 min | Mazlum, Guillaume sur la fiabilité | Référents, skills périmés, CI, la doc d'un outil, Google |
+| 8 | Clôture | 31–32 | 1 min 30 | Les deux | À retenir, punchline |
+| — | Q&A | | 6–12 min | Voir le tableau de `dialogue.md` | |
 
 ---
 
-## 1. Accroche & problème — 4 min
+## 1. Ouverture — 2 min (slides 1–3)
 
 - **Message :** générer du code avec l'IA = trivial ; le faire *aux conventions
-  de l'équipe* = autre histoire. C'est la limite du vibe coding individuel.
-- **À montrer :** une douleur relatable — chacun ré-explique à l'IA son
-  Dockerfile, son archi, son format de PR ; résultats incohérents d'un dev à
-  l'autre. Question d'ouverture : « comment faire coder l'IA *comme l'équipe
-  l'attend* ? »
+  de l'équipe* = autre histoire.
+- Chacun présente l'autre (slide 2), puis 10 secondes sur l'image TechCast
+  façon Guignols (slide 3) : on lit le bandeau, on enchaîne.
 
-## 2. Le faux-départ : le `CLAUDE.md` monolithe — 3 min
+## 2. Le problème — 3 min (slides 4–6)
 
-- **Message :** notre 1re tentative. Ça marche… puis ça devient ingérable :
-  trop long, contradictions, chargé tout le temps, personne ne le maintient.
-- **À montrer :** un (vrai) gros `CLAUDE.md` qui scrolle sans fin. Honnêteté →
-  crée la tension qui appelle les skills (modularité + activation à la demande).
+- Plateforme de registre d'API, stack exigeante (hexagonal, Terragrunt,
+  Workload Identity, IAP), une équipe de 8 aux niveaux variés.
+- Grâce à Claude, tout le monde fait évoluer les stacks ; mais les **nouveaux**
+  services et stacks IaC **divergent** : chacun son Claude, son CLAUDE.md.
 
-## 3. Les skills, c'est quoi — 6 min
+## 3. Du CLAUDE.md aux skills — 6 min (slides 7–13)
 
-- **Message :** un skill = un module de convention *activé à la demande* (pas
-  tout chargé en permanence).
-- **À montrer :** 1–2 skills réels seulement (anti-catalogue), p.ex.
-  `docker-image-conventions` et `pr-groupbees`. Pointer l'**anatomie** :
-  *concepts durables* (hexagonal, non-root au runtime) vs *mécanique volatile*
-  (flags, versions, commandes) — ça resservira en partie 5.
+- Le CLAUDE.md partagé : simple… puis il grossit, chargé tout le temps, coûteux
+  en tokens. Montrer le vrai fichier qui scrolle.
+- **Skill = CLAUDE.md modulaire, chargé à la demande.** La description est
+  toujours vue, le corps seulement si la tâche correspond.
+- Un skill est un dossier : `references/`, `assets/`, `scripts/`.
+- Le CLAUDE.md redevient le contexte durable du projet (AGENTS.md + pont).
+- Domaines composables : Docker générique + Python par-dessus.
 
-## 4. DÉMO — le cœur — 12 min
+## 4. Partager les skills — 4 min (slides 14–18)
 
-> Tout pré-chauffé (repo init, auth GCP faite, images en cache, app déjà
-> déployée). Voir « Prépa démo & filets » plus bas.
+- V1 : un catalogue synchronisé en global, versionné par tags git.
+- Limite : nos règles s'appliquent partout, clients compris → choisir projet
+  par projet, comme des dépendances.
+- Rien de propriétaire : Agent Skills (tous les agents) + AGENTS.md.
 
-- **4a — LE CONTRASTE (≈4 min, climax) :**
-  - Session Claude Code **sans skills / sans CLAUDE.md** (config pristine — voir
-    note technique) → même prompt → sortie **générique** : Dockerfile mono-stage,
-    pas d'archi claire, pas vos conventions.
-  - Session **avec** skills → même prompt → **vos conventions exactes** : hexa
-    Python, Dockerfile multi-stage non-root, CI conforme, tests aux conventions.
-  - Montrer le **delta côte à côte**. C'est *ça* la preuve que ce sont les
-    skills — pas « l'IA douée ».
-- **4b — Génération end-to-end (≈5 min) :** poursuivre *avec* skills →
-  back Python hexa, Dockerfile, CI/CD, tests aux conventions, **commit squashé**
-  (`commit-groupbees`) + **PR labellisée** (`pr-groupbees`). Montrer les
-  artefacts ; si risqué, s'appuyer sur du pré-généré et *commenter*.
-- **4c — Déploiement = cerise (≈3 min) :** app **déjà en ligne** (ouvrir l'URL)
-  OU lancer la **pipeline GHA** ; même si elle tombe en erreur, montrer le
-  résultat / l'URL déjà live. Court — ce n'est pas le climax.
+## 5. pollen — 6 min (slides 19–24)
 
-## 5. Gouverner les skills (part d'ombre) — 7 min
+- `pollen.yaml` façon pre-commit, `pollen update`, périmètre étroit.
+- **Pas de lockfile** (Mazlum) : le SHA épinglé est le lock ; `outdated` →
+  `autoupdate` → PR.
+- **Et npx skills ?** Guillaume l'avait regardé avant pollen : la différence
+  est dans le modèle (déclaratif, sans package.json, épinglé sur une release).
+- Ma config machine : trois propriétaires dans un fichier.
+- Spec Kit / BMAD : même format, autre contenu (processus vs conventions).
 
-- **Message :** une lib de skills, ça se gouverne — sinon on recrée le monolithe.
-- **Points :**
-  - Les skills sont **du code** → versionnés + relus en **PR**. Barre *plus
-    haute* : un skill s'applique à **tout** ce qui sera généré (blast radius).
-  - **L'IA drafte, l'humain possède et merge.**
-  - **Scanner IA de péremption** : factuelle (le flag existe-t-il encore ?) → PR,
-    pas auto-merge. Faible sur la péremption *de jugement*.
-  - **Durable vs volatil** (rappel partie 3) : la revue cible la zone volatile.
-  - **Capture à chaud** (war stories) : `run-all` → `run --all` (péremption
-    factuelle) ; le `401` Cloud Run dû à `X-Serverless-Authorization` relayé
-    (gotcha remonté dans le skill `cloud-run-iap` au point de douleur).
-  - **Owners** (`CODEOWNERS`) : sans propriétaire, « l'équipe maintient » =
-    personne ne maintient.
+## 6. DÉMO — le cœur — 10 min (slide 25)
 
-## 6. Méthodo transposable & clôture — 3 min
+> Pas de déploiement en live. Tout est pré-chauffé, les deux sorties sont
+> pré-capturées. Détail dans `script-demo.md`.
 
-- **Lundi matin :** extraire vos conventions de vos têtes → skills modulaires →
-  les gouverner comme du code.
-- **Transposable** : le principe (conventions encodées en modules activables +
-  gouvernées) vaut pour Cursor, Copilot.
+On enchaîne sans temps mort : **SANS génère (~80 s) pendant `pollen update`,
+AVEC génère (~3 min) pendant qu'on commente SANS.**
+
+| Beat | Durée | Pilote → commente | Contenu |
+|---|---|---|---|
+| 0 Cadrage | 30 s | Mazlum | Même prompt, deux fois |
+| 1 Lancer SANS | 30 s | Mazlum → Guillaume | Session vierge, prompt collé |
+| 2 pollen, lancer AVEC | 1 min 30 | Guillaume → Mazlum | `pollen.yaml`, dossier vide, `pollen update`, `quote-domain` |
+| 3 Sortie SANS | 2 min | Mazlum → Guillaume | pip, un stage, `GetRandomQuote`, README seul |
+| 4 Sortie AVEC | 2 min 30 | Guillaume → Mazlum | uv, trois couches, `GetRandomQuoteUseCase`, Given-When-Then, AGENTS.md, `?lang=fr` |
+| 5 Delta (climax) | 1 min 30 | Ping-pong | « L'IA n'est pas devenue meilleure. Les règles sont là. » |
+| 6 Release | 1 min | Mazlum → Guillaume | Une vraie release d'un repo existant : tag, PR labellisées, notes classées |
+
+## 7. Gouvernance — 6 min (slides 26–30)
+
+- **Une lib de skills, ça se gouverne** : du code, versionné, relu en PR ;
+  blast radius énorme. Relecture par les **référents** (transverses : Mazlum et
+  Guillaume ; spécialisés : ceux qui connaissent le domaine), pas de
+  CODEOWNERS.
+- **Quand un skill périme** : une règle périmée n'échoue pas, elle apprend le
+  mauvais pattern (`run-all` → `run --all`). Ce qui peut devenir un check en
+  devient un.
+- **La CI d'un module** : skill-validator, workflow partagé épinglé, Dependabot.
+- **La doc d'un outil est aussi un skill** : le skill `pollen` livré avec pollen.
+- **Comment fait Google ?** Evals obligatoires et hebdomadaires : notre
+  prochaine marche.
+
+## 8. Clôture — 1 min 30 (slides 31–32)
+
+- À retenir, un point chacun : skills plutôt qu'un CLAUDE.md géant ; par
+  projet, épinglés ; gouvernés comme du code.
 - **Punchline :** « Pas par magie : parce que les règles sont là. »
+- Cloud Nord : la slide de fin porte le QR OpenFeedback, elle reste affichée
+  pendant les questions.
 
 ---
 
-## Variantes de durée
+## Ajuster à la répétition
 
-- **30 min :** démo 10 (contraste 4 + génération 4 + deploy 2), gouvernance 6,
-  skills 5, accroche 3.
-- **40 min :** démo 14 (2e exemple de skill / un échec en live rattrapé),
-  gouvernance 9 (process de revue détaillé + diffusion/versioning), +2 sur les
-  skills.
+- **Trop long** : passer en annexe « Et Spec Kit, BMAD ? » (slide 24) et « La
+  doc d'un outil est aussi un skill » (slide 29) ; écourter le Beat 6.
+- **Cloud Nord (≈ 50 min)** : les 5 minutes de plus vont aux questions, pas au
+  contenu.
+- La démo est le seul bloc à durée variable : chronométrer AVEC sur le réseau
+  de la salle.
 
-## Prépa démo & filets (anti-panne)
+## Note technique — la session « sans skills » pour le contraste
 
-- **Tout pré-chauffé** : repo init, `gcloud auth` faite, layers d'images en
-  cache, **app déjà déployée** (URL ouverte dans un onglet).
-- **Déploiement** : via **GHA** (build/push sur les runners GitHub, pas le wifi
-  de conf), avec l'URL déjà live comme filet. Jamais de `gcloud deploy` à froid
-  depuis le laptop.
-- **Génération** : pré-générer en répét' ; garder les artefacts sous la main pour
-  *commenter* si la génération live traîne.
-- **Screencast de secours** de toute la démo (au cas où réseau/Claude Code KO).
-- **App de démo** : minuscule, stateless, **pas de DB / pas de secrets**,
-  **publique (`--allow-unauthenticated`) ou IAP pré-configuré** — ne pas rejouer
-  le flow login IAP en live.
-
-### Note technique — la session « sans skills » pour le contraste
-
-**VÉRIFIÉ sur Claude Code v2.1.280** (test réel en `-p`, 23/09/2026). Toggle
+**Vérifié sur Claude Code v2.1.280** (test réel en `-p`, 23/09/2026), et
+utilisé tel quel pour les tests de démo du 27/10/2026 (v2.1.309). Toggle
 **non destructif** — juste des flags, rien à restaurer après :
 
 ```bash
 # SANS (baseline générique) : ni CLAUDE.md, ni mémoire, ni skills (user, projet, plugins, built-in)
 claude --safe-mode --disable-slash-commands
 
-# AVEC : dans le projet de démo, après `skillmgr update`
+# AVEC : dans skills-demo, après `pollen update`
 claude
 ```
 
@@ -135,8 +141,8 @@ Résultats mesurés (« liste tes skills » + « vois-tu un CLAUDE.md ? ») :
 | `--safe-mode --disable-slash-commands` | **aucun** | **non** ✅ |
 | `--bare --disable-slash-commands` | — | ❌ « Not logged in » |
 
-- ❌ **L'ancienne recette `--bare` ne marche plus avec un login Claude
-  (OAuth)** : `--bare` n'accepte que `ANTHROPIC_API_KEY` / `apiKeyHelper`.
+- ❌ **`--bare` ne marche pas avec un login Claude (OAuth)** : il n'accepte que
+  `ANTHROPIC_API_KEY` / `apiKeyHelper`.
 - `--safe-mode` coupe toutes les personnalisations (CLAUDE.md, skills,
   plugins installés, hooks, MCP, agents…) mais garde l'auth et les built-in ;
   `--disable-slash-commands` retire le reste des skills (built-in compris).

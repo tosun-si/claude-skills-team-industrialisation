@@ -1,4 +1,4 @@
-"""Slide-by-slide content — DevFest Toulouse (2 speakers, ~35 min + Q&A).
+"""Slide-by-slide content — DevFest Toulouse (2 speakers, ~38 min + Q&A).
 
 « Industrialiser l'IA en équipe : des skills qui encodent vos conventions »
 Mazlum Tosun & Guillaume Leroy · GroupBees

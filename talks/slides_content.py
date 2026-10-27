@@ -741,6 +741,11 @@ SLIDES = [
     },
 ]
 
+# QR codes de la slide de fin, à la place de l'abeille : [(fichier, légende)],
+# le premier en grand (feedback de l'événement), les suivants en petit dessous.
+# Vide pour DevFest ; build_cloud_nord.sh y met le QR OpenFeedback.
+END_QRS = []
+
 # Repères de scène, en tête des notes : qui parle, les points à ne pas
 # oublier, la phrase qui passe le relais. Indexés par titre de slide ; le
 # dialogue complet, pour les répétitions, est dans ../dialogue.md.

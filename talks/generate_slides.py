@@ -227,8 +227,12 @@ def render_end(prs, data):
     slide = _blank(prs)
     _dark_background(slide)
     _gradient(slide, 0, 0, SLIDE_W, Inches(0.12))
-    _picture(slide, data.get("mascot", "bee.png"), left=Inches(9.6),
-             top=Inches(1.8), height=Inches(4.2))
+    qrs = getattr(slides_content, "END_QRS", [])
+    if qrs:
+        _end_qrs(slide, qrs)
+    else:
+        _picture(slide, data.get("mascot", "bee.png"), left=Inches(9.6),
+                 top=Inches(1.8), height=Inches(4.2))
 
     tf = _textbox(slide, Inches(0.7), Inches(2.4), Inches(8.6), Inches(1.4))
     _line(tf, data["title"], first=True, size=54, bold=True, color=WHITE,
@@ -238,6 +242,30 @@ def render_end(prs, data):
     for i, line in enumerate(data.get("lines", [])):
         _line(tf2, line, first=(i == 0), size=20, color=MIST, space_after=10)
     _notes(slide, data.get("notes"))
+
+
+def _end_qrs(slide, qrs):
+    """QR codes on the end slide, in place of the mascot: the first one large
+    (the event's feedback form), the others small in a row beneath it.
+    Each is (file, caption); a white card keeps the quiet zone scannable."""
+    def qr(name, caption, x, y, size, caption_size):
+        pad = Inches(0.12)
+        _rect(slide, x - pad, y - pad, size + 2 * pad, size + 2 * pad, WHITE,
+              shape=MSO_SHAPE.ROUNDED_RECTANGLE).adjustments[0] = 0.05
+        _picture(slide, name, left=x, top=y, width=size, height=size)
+        tf = _textbox(slide, x - Inches(0.5), y + size + Inches(0.18),
+                      size + Inches(1.0), Inches(0.4))
+        _line(tf, caption, first=True, align=PP_ALIGN.CENTER, size=caption_size,
+              color=MIST)
+
+    (name, caption), *others = qrs
+    big = Inches(3.3)
+    qr(name, caption, Inches(9.45), Inches(1.2), big, 16)
+    small, gap = Inches(1.2), Inches(0.5)
+    x = Inches(9.45) + (big - len(others) * small - (len(others) - 1) * gap) // 2
+    for name, caption in others:
+        qr(name, caption, x, Inches(5.35), small, 11)
+        x += small + gap
 
 
 def render_bullets(prs, data):

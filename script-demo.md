@@ -11,7 +11,7 @@ pour SANS et AVEC). Il ne cite aucune convention, ni pip ni uv.
 
 | Côté | Dossier | Session |
 |---|---|---|
-| **SANS** | `~/demo/skills-demo-no-skills/` (vide) | `claude --safe-mode --disable-slash-commands` — ni CLAUDE.md, ni skills |
+| **SANS** | `~/my-projects/groupbees/skills-demo-no-skills/` (repo `groupbees/skills-demo-no-skills`, `main` vide) | `claude --safe-mode --disable-slash-commands` — ni CLAUDE.md, ni skills |
 | **AVEC** | `~/my-projects/groupbees/skills-demo/` (branche `main`) | `pollen update`, puis `claude` |
 
 **Pas de déploiement en live.** La fin de démo montre une vraie release déjà
@@ -42,13 +42,20 @@ auteur sur la citation, WIF dans la CI. Ne pas le dire sur scène.
 ## Pré-stage (état pré-chauffé)
 
 - [ ] `pollen --version` (≥ 0.6.0) ; `claude --version` figée.
-- [ ] `~/demo/skills-demo-no-skills/` existe et est **vide**.
+- [ ] `skills-demo-no-skills` cloné à côté de `skills-demo`, sur `main` (vide).
 - [ ] `skills-demo` sur `main`, propre : `pollen.yaml` (skills-core v0.4.0) +
       `.skills/quote-domain/`, **pas** d'AGENTS.md, CLAUDE.md ni README,
       **`.claude/skills/` vide** (`rm -rf .claude/skills .agents/skills`).
-- [ ] **Sorties SANS et AVEC déjà capturées** (Dockerfile, arbo, test,
-      AGENTS.md, `quote.py` des deux côtés) → fichiers ouverts pour bascule
-      immédiate.
+- [ ] **Sorties SANS et AVEC de référence** ouvertes dans l'éditeur pour
+      bascule immédiate : branche `reference` de skills-demo-no-skills et
+      branche `reference/avec` de skills-demo (générées le 27/10/2026, sans
+      retouche, tests verts) :
+      ```bash
+      cd ~/my-projects/groupbees/skills-demo-no-skills && git fetch
+      git worktree add ~/demo/reference-sans origin/reference
+      cd ~/my-projects/groupbees/skills-demo && git fetch
+      git worktree add ~/demo/reference-avec origin/reference/avec
+      ```
 - [ ] Onglet navigateur ouvert sur la **release vitrine** (un repo existant :
       tag, PR labellisées, notes classées).
 - [ ] Screencast complet du happy path.
@@ -90,7 +97,7 @@ génère pendant qu'on commente SANS.**
 - **Faire :** les deux terminaux côte à côte (SANS à gauche, AVEC à droite).
 
 ### Beat 1 — Lancer SANS (30 s)
-- **Faire :** terminal gauche, `~/demo/skills-demo-no-skills/` → `claude --safe-mode --disable-slash-commands` → **coller** le prompt. Ne pas attendre (~80 s de génération).
+- **Faire :** terminal gauche, `skills-demo-no-skills/` → `claude --safe-mode --disable-slash-commands` → **coller** le prompt. Ne pas attendre (~80 s de génération).
 
 ### Beat 2 — pollen charge les skills, lancer AVEC (~1 min 30)
 - **Faire :** terminal droit, dans `skills-demo/` :
@@ -114,7 +121,7 @@ génère pendant qu'on commente SANS.**
 
 ### Beat 5 — LE DELTA (~1 min 30, climax)
 - **Faire :** vue côte à côte, une paire chacun : pip/uv, Dockerfile, archi, tests, doc.
-- **Option :** dans la session AVEC, `Compare ~/demo/skills-demo-no-skills et ce projet : Dockerfile, archi, tests, CI, doc. Un tableau.` (à chronométrer en répét').
+- **Option :** dans la session AVEC, `Compare ../skills-demo-no-skills et ce projet : Dockerfile, archi, tests, CI, doc. Un tableau.` (à chronométrer en répét').
 - **Dire :** « L'IA n'est pas devenue meilleure entre les deux. Les **règles sont là**. »
 
 ### Beat 6 — Jusqu'à la release (~1 min)
@@ -129,9 +136,10 @@ génère pendant qu'on commente SANS.**
 ## Reset entre deux runs (répét')
 
 ```bash
-rm -rf ~/demo/skills-demo-no-skills && mkdir -p ~/demo/skills-demo-no-skills
-cd ~/my-projects/groupbees/skills-demo
-git switch main && git reset --hard origin/main && git clean -fdx -e .idea -e "*.iml"
+for repo in skills-demo-no-skills skills-demo; do
+  cd ~/my-projects/groupbees/$repo
+  git switch main && git reset --hard origin/main && git clean -fdx -e .idea -e "*.iml"
+done
 ```
 
 `git clean -fdx` retire aussi `.claude/skills`, `.agents/skills` et `.venv`

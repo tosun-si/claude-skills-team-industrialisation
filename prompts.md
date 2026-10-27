@@ -31,7 +31,7 @@ fichier de plus, et la preuve la plus visible du contraste.
 
 | | SANS | AVEC |
 |---|---|---|
-| Dossier | `~/demo/skills-demo-no-skills/` (vide) | `~/my-projects/groupbees/skills-demo/` |
+| Repo | `~/my-projects/groupbees/skills-demo-no-skills/` (`groupbees/skills-demo-no-skills`, `main` vide) | `~/my-projects/groupbees/skills-demo/` (`groupbees/skills-demo`, `main`) |
 | Lancement | `claude --safe-mode --disable-slash-commands` | `pollen update`, puis `claude` |
 | Contexte | rien : ni CLAUDE.md, ni skills | `pollen.yaml` + `.skills/quote-domain` |
 

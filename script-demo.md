@@ -11,7 +11,7 @@ aucune convention.
 
 | Côté | Dossier | Session |
 |---|---|---|
-| **SANS** | `~/demo/quote-bare/` (vide) | `claude --safe-mode --disable-slash-commands` — ni CLAUDE.md, ni skills |
+| **SANS** | `~/demo/skills-demo-no-skills/` (vide) | `claude --safe-mode --disable-slash-commands` — ni CLAUDE.md, ni skills |
 | **AVEC** | `~/my-projects/groupbees/skills-demo/` | `claude`, après `pollen update` |
 
 ---
@@ -36,7 +36,7 @@ dans ta config globale ; une session normale les voit de toute façon.
 ## Pré-stage (état pré-chauffé)
 
 - [ ] `pollen --version` (≥ 0.4.0) ; `pollen outdated -g` : tout à jour.
-- [ ] `~/demo/quote-bare/` existe et est **vide** (session SANS).
+- [ ] `~/demo/skills-demo-no-skills/` existe et est **vide** (session SANS).
 - [ ] `~/my-projects/groupbees/skills-demo/` : `pollen.yaml` épinglé,
       `.skills/quote-domain/`, **`.claude/skills/` vide** (pour le
       `pollen update` en live : `rm -rf .claude/skills .agents/skills`).
@@ -79,7 +79,7 @@ skills-demo/
 - **Faire :** les deux terminaux côte à côte (SANS à gauche, AVEC à droite).
 
 ### Beat 1 — SANS skills (~2 min 30)
-- **Faire :** terminal gauche, dans `~/demo/quote-bare/` → `claude --safe-mode --disable-slash-commands` → **coller** le prompt.
+- **Faire :** terminal gauche, dans `~/demo/skills-demo-no-skills/` → `claude --safe-mode --disable-slash-commands` → **coller** le prompt.
 - **Montrer :** la sortie générique — `main.py` quasi monolithique, Dockerfile **mono-stage** en **root**, CI minimale, tests pauvres, une citation **sans auteur ni langue**.
 - **Dire :** « C'est correct. Ça marche. Mais ce n'est pas comme NOUS, on code. »
 - **Filet :** génération trop lente → ouvrir la sortie SANS pré-capturée.
@@ -123,7 +123,7 @@ skills-demo/
 ## Reset entre deux runs (répét')
 
 ```bash
-rm -rf ~/demo/quote-bare && mkdir ~/demo/quote-bare
+rm -rf ~/demo/skills-demo-no-skills && mkdir ~/demo/skills-demo-no-skills
 cd ~/my-projects/groupbees/skills-demo
 git reset --hard <commit-de-base> && git clean -fd
 rm -rf .claude/skills .agents/skills        # pour rejouer `pollen update`

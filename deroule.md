@@ -102,7 +102,7 @@ AVEC génère (~3 min) pendant qu'on commente SANS.**
 
 - À retenir, un point chacun : skills plutôt qu'un CLAUDE.md géant ; par
   projet, épinglés ; gouvernés comme du code.
-- **Essayez-le** : QR pollen et QR d'un catalogue public (`skills-gitlab`),
+- **Essayez-le** : QR pollen et QR de nos skills en public (`tosun-si/skills-core`),
   la commande d'installation ; 10 secondes pour scanner.
 - **Punchline :** « Pas par magie : parce que les règles sont là. »
 - La slide de fin porte le QR feedback de l'événement (DevFest : à ajouter

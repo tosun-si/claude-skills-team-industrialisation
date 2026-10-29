@@ -397,9 +397,9 @@ pilote reste concentré.
 
 ### 32 · Essayez-le — *Mazlum ou Guillaume, à répartir*
 
-> De quoi l'essayer ce soir : pollen, et un catalogue public rangé par
-> domaines, comme celui de la démo. Le `pollen.yaml` du README marche tel
-> quel.
+> De quoi l'essayer ce soir : pollen, et nos skills de la démo, en public
+> (`tosun-si/skills-core`, rangé par domaines). Le `pollen.yaml` du README
+> marche tel quel.
 
 *(Laisser 10 secondes pour scanner. Aux questions, revenir sur cette slide si
 on demande un lien.)*

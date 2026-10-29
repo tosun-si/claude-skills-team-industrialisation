@@ -733,14 +733,14 @@ SLIDES = [
         "title": "Essayez-le",
         "links": [
             ("qr_pollen.png", "pollen", "github.com/groupbees/pollen"),
-            ("qr_skills_gitlab.png", "Un catalogue d'exemple",
-             "github.com/groupbees/skills-gitlab"),
+            ("qr_skills_core.png", "Nos skills, en public",
+             "github.com/tosun-si/skills-core"),
         ],
         "kicker": "brew install groupbees/tap/pollen  ·  pip install pollen-skills",
         "notes": (
-            "De quoi l'essayer ce soir. pollen, et un catalogue public rangé par "
-            "domaines, comme celui de la démo : le pollen.yaml du README marche "
-            "tel quel."
+            "De quoi l'essayer ce soir. pollen, et nos skills en public : le "
+            "skills-core de la démo, rangé par domaines. Le pollen.yaml du README "
+            "marche tel quel."
         ),
     },
     {
@@ -952,7 +952,7 @@ CUES = {
     ),
     "Essayez-le": (
         "🎤 Mazlum ou Guillaume (à répartir)\n"
-        "• « De quoi l'essayer ce soir : pollen, et un catalogue public rangé par domaines »\n"
+        "• « De quoi l'essayer ce soir : pollen, et nos skills de la démo, en public »\n"
         "• Le pollen.yaml du README marche tel quel · laisser 10 s pour scanner\n"
         "• Aux questions, revenir ici si on demande un lien"
     ),

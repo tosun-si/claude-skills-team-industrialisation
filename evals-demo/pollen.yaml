@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/groupbees/pollen/main/schema/pollen.schema.json
+#
+# Le skill évalué, tiré de skills-core (privé) dans le dossier du plugin :
+# ignoré par git, jamais commité dans ce repo public.
+# À lancer depuis evals-demo/ : `pollen update`.
+repos:
+  - repo: git@github.com:groupbees/skills-core.git   # privé : SSH
+    revision: 0ada6eff527bad1c81078c6c8b9bc0de3e9bcd34  # v0.4.0
+    paths:
+      - path: skills/docker/python-docker-multistage
+      - path: skills/docker/docker-image-conventions   # la base qu'il spécialise
+targets:
+  - plugin/skills

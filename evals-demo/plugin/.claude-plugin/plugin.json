@@ -1,0 +1,5 @@
+{
+  "name": "groupbees-docker",
+  "description": "python-docker-multistage + docker-image-conventions, déployés par pollen, sous eval",
+  "experimental": { "evals": "evals" }
+}

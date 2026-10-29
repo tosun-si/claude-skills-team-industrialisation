@@ -7,7 +7,7 @@ Output: talks/slides/<DECK_NAME>.pptx — DECK_NAME is set in slides_content.py.
 
 Design: GroupBees identity — cyan → purple gradient, near-black ink, white.
 Assets in talks/assets/ (logo + bee mascots). Slide types: title, speakers,
-journey, bullets, compare, image, code, demo, takeaways, end.
+journey, bullets, compare, image, code, demo, takeaways, links, end.
 
 Every slide also takes `bees`: decorative mascots, as tuples
 (file, x, y, height[, rotation_deg[, flip]]) in inches — add your own freely.
@@ -227,9 +227,10 @@ def render_end(prs, data):
     slide = _blank(prs)
     _dark_background(slide)
     _gradient(slide, 0, 0, SLIDE_W, Inches(0.12))
+    feedback = getattr(slides_content, "FEEDBACK_QR", None)
     qrs = getattr(slides_content, "END_QRS", [])
-    if qrs:
-        _end_qrs(slide, qrs)
+    if feedback or qrs:
+        _end_qrs(slide, feedback, qrs)
     else:
         _picture(slide, data.get("mascot", "bee.png"), left=Inches(9.6),
                  top=Inches(1.8), height=Inches(4.2))
@@ -244,28 +245,56 @@ def render_end(prs, data):
     _notes(slide, data.get("notes"))
 
 
-def _end_qrs(slide, qrs):
-    """QR codes on the end slide, in place of the mascot: the first one large
-    (the event's feedback form), the others small in a row beneath it.
-    Each is (file, caption); a white card keeps the quiet zone scannable."""
-    def qr(name, caption, x, y, size, caption_size):
-        pad = Inches(0.12)
-        _rect(slide, x - pad, y - pad, size + 2 * pad, size + 2 * pad, WHITE,
-              shape=MSO_SHAPE.ROUNDED_RECTANGLE).adjustments[0] = 0.05
-        _picture(slide, name, left=x, top=y, width=size, height=size)
-        tf = _textbox(slide, x - Inches(0.5), y + size + Inches(0.18),
-                      size + Inches(1.0), Inches(0.4))
-        _line(tf, caption, first=True, align=PP_ALIGN.CENTER, size=caption_size,
-              color=MIST)
+def _qr(slide, name, caption, x, y, size, caption_size, *, sub=None):
+    """A QR code on a white card (keeps the quiet zone scannable on dark),
+    its caption centered beneath, and an optional smaller second line."""
+    pad = Inches(0.12)
+    _rect(slide, x - pad, y - pad, size + 2 * pad, size + 2 * pad, WHITE,
+          shape=MSO_SHAPE.ROUNDED_RECTANGLE).adjustments[0] = 0.05
+    _picture(slide, name, left=x, top=y, width=size, height=size)
+    tf = _textbox(slide, x - Inches(0.5), y + size + Inches(0.18),
+                  size + Inches(1.0), Inches(0.8))
+    _line(tf, caption, first=True, align=PP_ALIGN.CENTER, size=caption_size,
+          color=MIST)
+    if sub:
+        _line(tf, sub, align=PP_ALIGN.CENTER, size=caption_size - 4, color=CYAN)
 
-    (name, caption), *others = qrs
-    big = Inches(3.3)
-    qr(name, caption, Inches(9.45), Inches(1.2), big, 16)
-    small, gap = Inches(1.2), Inches(0.5)
-    x = Inches(9.45) + (big - len(others) * small - (len(others) - 1) * gap) // 2
-    for name, caption in others:
-        qr(name, caption, x, Inches(5.35), small, 11)
+
+def _end_qrs(slide, feedback, qrs):
+    """QR codes on the end slide, in place of the mascot: the event's feedback
+    form large, the others (file, caption) small in a row beneath it. Without
+    a feedback form, the others alone, medium-sized and centered."""
+    center = Inches(11.1)
+    if feedback:
+        big = Inches(2.9)
+        _qr(slide, *feedback, center - big // 2, Inches(0.95), big, 16)
+        small, gap, y = Inches(1.1), Inches(0.6), Inches(4.75)
+    else:
+        small, gap, y = Inches(1.5), Inches(0.45), Inches(2.4)
+    x = center - (len(qrs) * small + (len(qrs) - 1) * gap) // 2
+    for name, caption in qrs:
+        _qr(slide, name, caption, x, y, small, 11 if feedback else 13)
         x += small + gap
+
+
+def render_links(prs, data):
+    """Where to go next: QR codes side by side, each with a name and its URL,
+    and an optional one-line kicker (e.g. the install command)."""
+    slide = _blank(prs)
+    _dark_background(slide)
+    _gradient(slide, 0, 0, SLIDE_W, Inches(0.12))
+    _title(slide, data["title"], dark=True)
+    links = data["links"]
+    size, gap = Inches(2.6), Inches(2.2)
+    x = (SLIDE_W - len(links) * size - (len(links) - 1) * gap) // 2
+    for name, caption, url in links:
+        _qr(slide, name, caption, x, Inches(1.85), size, 22, sub=url)
+        x += size + gap
+    if data.get("kicker"):
+        tf = _textbox(slide, Inches(0.7), Inches(6.05), Inches(11.9), Inches(0.5))
+        _line(tf, data["kicker"], first=True, align=PP_ALIGN.CENTER, size=18,
+              color=WHITE, font=CODE_FONT)
+    _notes(slide, data.get("notes"))
 
 
 def render_bullets(prs, data):
@@ -553,10 +582,11 @@ RENDERERS = {
     "code": render_code,
     "demo": render_demo,
     "takeaways": render_takeaways,
+    "links": render_links,
     "end": render_end,
 }
 
-DARK_TYPES = {"title", "demo", "end"}
+DARK_TYPES = {"title", "demo", "links", "end"}
 
 
 # ── motion ───────────────────────────────────────────────────────────────────

@@ -1,6 +1,6 @@
 # Dialogue Mazlum × Guillaume (proposition, à affiner)
 
-Répartition des 32 slides entre les deux speakers, avec les passages de relais.
+Répartition des 33 slides entre les deux speakers, avec les passages de relais.
 Le texte est une base orale, pas un script à réciter : chacun le reformule à sa
 façon. Les notes de chaque slide gardent le fond, sous un repère de scène condensé
 (`CUES` dans `talks/slides_content.py`).
@@ -24,7 +24,7 @@ façon. Les notes de chaque slide gardent le fond, sous un repère de scène con
 | pollen | 19–24 | Guillaume, Mazlum sur le lockfile, npx skills et sa config |
 | Démo | 25 | Alternance par beat |
 | Gouvernance | 26–30 | Mazlum, Guillaume sur la fiabilité |
-| Clôture | 31–32 | Les deux |
+| Clôture | 31–33 | Les deux |
 
 ---
 
@@ -395,7 +395,16 @@ pilote reste concentré.
 >
 > **Guillaume** : Relecture, CI… et bientôt des evals.
 
-### 32 · Pas par magie. — *les deux*
+### 32 · Essayez-le — *Mazlum ou Guillaume, à répartir*
+
+> De quoi l'essayer ce soir : pollen, et un catalogue public rangé par
+> domaines, comme celui de la démo. Le `pollen.yaml` du README marche tel
+> quel.
+
+*(Laisser 10 secondes pour scanner. Aux questions, revenir sur cette slide si
+on demande un lien.)*
+
+### 33 · Pas par magie. — *les deux*
 
 > **Mazlum** : Ce n'est pas par magie que l'IA a codé comme nous.
 >

@@ -1,7 +1,7 @@
 # Déroulé du talk (timé)
 
 **Titre :** *Industrialiser l'IA en équipe : des skills qui encodent vos conventions*
-**Speakers :** Mazlum Tosun & Guillaume Leroy · 32 slides
+**Speakers :** Mazlum Tosun & Guillaume Leroy · 33 slides
 
 Créneaux : **DevFest Toulouse ≈ 45 min**, **Cloud Nord ≈ 50 min** (à
 confirmer). Cœur de **≈ 38 min**, le reste en Q&A. Fil rouge unique : **le
@@ -20,7 +20,7 @@ Qui dit quoi, réplique par réplique : `dialogue.md`. Démo pas à pas :
 | 5 | pollen | 19–24 | 6 min | Guillaume, Mazlum sur le lockfile, npx skills et sa config | `pollen.yaml`, pas de lockfile, npx skills, trois propriétaires, Spec Kit / BMAD |
 | 6 | **DÉMO (le cœur)** | 25 | 10 min | Alternance par beat | Même prompt sans / avec skills, delta, release |
 | 7 | Gouvernance | 26–30 | 6 min | Mazlum, Guillaume sur la fiabilité | Référents, skills périmés, CI, la doc d'un outil, Google |
-| 8 | Clôture | 31–32 | 1 min 30 | Les deux | À retenir, punchline |
+| 8 | Clôture | 31–33 | 2 min | Les deux | À retenir, de quoi l'essayer, punchline |
 | — | Q&A | | 6–12 min | Voir le tableau de `dialogue.md` | |
 
 ---
@@ -98,13 +98,16 @@ AVEC génère (~3 min) pendant qu'on commente SANS.**
 - **Comment fait Google ?** Evals obligatoires et hebdomadaires : notre
   prochaine marche.
 
-## 8. Clôture — 1 min 30 (slides 31–32)
+## 8. Clôture — 2 min (slides 31–33)
 
 - À retenir, un point chacun : skills plutôt qu'un CLAUDE.md géant ; par
   projet, épinglés ; gouvernés comme du code.
+- **Essayez-le** : QR pollen et QR d'un catalogue public (`skills-gitlab`),
+  la commande d'installation ; 10 secondes pour scanner.
 - **Punchline :** « Pas par magie : parce que les règles sont là. »
-- Cloud Nord : la slide de fin porte le QR OpenFeedback, elle reste affichée
-  pendant les questions.
+- La slide de fin porte le QR feedback de l'événement (DevFest : à ajouter
+  dans `FEEDBACK_QR` ; Cloud Nord : OpenFeedback) et nos deux LinkedIn ; elle
+  reste affichée pendant les questions.
 
 ---
 

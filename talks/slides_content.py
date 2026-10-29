@@ -729,22 +729,41 @@ SLIDES = [
         "notes": "Trois idées à ramener lundi matin dans votre équipe.",
     },
     {
+        "type": "links",
+        "title": "Essayez-le",
+        "links": [
+            ("qr_pollen.png", "pollen", "github.com/groupbees/pollen"),
+            ("qr_skills_gitlab.png", "Un catalogue d'exemple",
+             "github.com/groupbees/skills-gitlab"),
+        ],
+        "kicker": "brew install groupbees/tap/pollen  ·  pip install pollen-skills",
+        "notes": (
+            "De quoi l'essayer ce soir. pollen, et un catalogue public rangé par "
+            "domaines, comme celui de la démo : le pollen.yaml du README marche "
+            "tel quel."
+        ),
+    },
+    {
         "type": "end",
         "title": "Pas par magie.",
         "mascot": "bee_happy.png",
         "lines": [
             "Parce que les règles sont là.",
-            "github.com/groupbees/pollen",
             "Merci ! Des questions ?",
         ],
         "notes": "Merci ! On prend vos questions.",
     },
 ]
 
-# QR codes de la slide de fin, à la place de l'abeille : [(fichier, légende)],
-# le premier en grand (feedback de l'événement), les suivants en petit dessous.
-# Vide pour DevFest ; build_cloud_nord.sh y met le QR OpenFeedback.
-END_QRS = []
+# QR codes de la slide de fin, à la place de l'abeille. FEEDBACK_QR, le
+# formulaire de l'événement (fichier, légende), s'affiche en grand ; None tant
+# que DevFest n'a pas fourni le sien, build_cloud_nord.sh y met OpenFeedback.
+# END_QRS en petit dessous : [(fichier, légende)].
+FEEDBACK_QR = None
+END_QRS = [
+    ("qr_linkedin_mazlum.png", "Mazlum · LinkedIn"),
+    ("qr_linkedin_guillaume.png", "Guillaume · LinkedIn"),
+]
 
 # Repères de scène, en tête des notes : qui parle, les points à ne pas
 # oublier, la phrase qui passe le relais. Indexés par titre de slide ; le
@@ -930,6 +949,12 @@ CUES = {
         "• Mazlum : conventions dans des skills, pas un CLAUDE.md géant\n"
         "• Guillaume : skills par projet, épinglés comme des dépendances\n"
         "• Mazlum : gouvernés comme du code · Guillaume : « relecture, CI… et bientôt des evals »"
+    ),
+    "Essayez-le": (
+        "🎤 Mazlum ou Guillaume (à répartir)\n"
+        "• « De quoi l'essayer ce soir : pollen, et un catalogue public rangé par domaines »\n"
+        "• Le pollen.yaml du README marche tel quel · laisser 10 s pour scanner\n"
+        "• Aux questions, revenir ici si on demande un lien"
     ),
     "Pas par magie.": (
         "🎤 Les deux\n"

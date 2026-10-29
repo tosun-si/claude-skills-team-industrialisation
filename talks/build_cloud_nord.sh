@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 #
 # Build the Cloud Nord deck from the DevFest content: same slides, Cloud Nord
-# footer and title line, and the OpenFeedback QR code on the end slide.
+# footer and title line, and the OpenFeedback QR code on the end slide (in
+# place of DevFest's feedback form).
 #
 # Usage: talks/build_cloud_nord.sh [output-dir]
 #   output-dir defaults to ~/my-projects/conferences/cloud_nord/2026
@@ -21,10 +22,10 @@ sed -i.bak \
   -e "s/^DECK_NAME = .*/DECK_NAME = \"$deck\"/" \
   -e "s/^FOOTER_TEXT = .*/FOOTER_TEXT = \"Industrialiser l'IA en équipe · Cloud Nord\"/" \
   -e 's/· DevFest Toulouse 2026",/· Cloud Nord 2026",/' \
-  -e 's/^END_QRS = \[\]/END_QRS = [("qr_openfeedback_cloud_nord.png", "Votre avis compte · OpenFeedback")]/' \
+  -e 's/^FEEDBACK_QR = .*/FEEDBACK_QR = ("qr_openfeedback_cloud_nord.png", "Votre avis compte · OpenFeedback")/' \
   "$content"
 
-if grep -q "DevFest Toulouse 2026\|^END_QRS = \[\]" "$content"; then
+if grep -q "DevFest Toulouse 2026" "$content" || ! grep -q "^FEEDBACK_QR = (\"qr_openfeedback" "$content"; then
   echo "error: the Cloud Nord substitutions did not all apply" >&2
   exit 1
 fi

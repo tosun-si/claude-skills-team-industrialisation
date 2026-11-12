@@ -105,8 +105,8 @@ AVEC génère (~3 min) pendant qu'on commente SANS.**
 - **Essayez-le** : QR pollen et QR de nos skills en public (`tosun-si/skills-core`),
   la commande d'installation ; 10 secondes pour scanner.
 - **Punchline :** « Pas par magie : parce que les règles sont là. »
-- La slide de fin porte le QR feedback de l'événement (DevFest : à ajouter
-  dans `FEEDBACK_QR` ; Cloud Nord : OpenFeedback) et nos deux LinkedIn ; elle
+- La slide de fin porte le QR feedback de l'événement (DevFest : la page du
+  talk ; Cloud Nord : OpenFeedback) et nos deux LinkedIn ; elle
   reste affichée pendant les questions.
 
 ---

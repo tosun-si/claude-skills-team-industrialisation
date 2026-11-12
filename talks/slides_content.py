@@ -758,10 +758,10 @@ SLIDES = [
 ]
 
 # QR codes de la slide de fin, à la place de l'abeille. FEEDBACK_QR, le
-# formulaire de l'événement (fichier, légende), s'affiche en grand ; None tant
-# que DevFest n'a pas fourni le sien, build_cloud_nord.sh y met OpenFeedback.
+# feedback de l'événement (fichier, légende), s'affiche en grand : à DevFest,
+# la page du talk ; build_cloud_nord.sh y met OpenFeedback.
 # END_QRS en petit dessous : [(fichier, légende)].
-FEEDBACK_QR = None
+FEEDBACK_QR = ("qr_feedback_devfest_toulouse.png", "Votre avis compte · page du talk")
 END_QRS = [
     ("qr_linkedin_mazlum.png", "Mazlum · LinkedIn"),
     ("qr_linkedin_guillaume.png", "Guillaume · LinkedIn"),

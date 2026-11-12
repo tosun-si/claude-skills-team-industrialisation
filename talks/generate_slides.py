@@ -460,10 +460,12 @@ def render_speakers(prs, data):
                     sp.get("photo"), sp.get("initials", "?"))
         tx = x + Inches(2.65)
         tf = _textbox(slide, tx, top + Inches(0.55), card_w - Inches(2.85), Inches(1.4))
-        first, *rest = sp["name"].split(" ", 1)
-        _line(tf, first, first=True, size=30, bold=True, color=INK, font=HEADING_FONT)
-        if rest:
-            _line(tf, rest[0], size=30, bold=True, color=INK, font=HEADING_FONT)
+        # "First Last" → two lines; a name with "\n" sets its own lines.
+        name = sp["name"]
+        lines = name.split("\n") if "\n" in name else name.split(" ", 1)
+        for k, part in enumerate(lines):
+            _line(tf, part, first=(k == 0), size=30, bold=True, color=INK,
+                  font=HEADING_FONT)
         ry = top + Inches(2.7)
         for j, role in enumerate(sp["roles"]):
             _rect(slide, x + Inches(0.45), ry + Inches(0.1), Inches(0.16), Inches(0.16),

@@ -56,7 +56,7 @@ SLIDES = [
                 "sticker": ("badge_psg.png", 0.95, 12),
             },
             {
-                "name": "Guillaume Leroy",
+                "name": 'Guillaume\n"Francis"\nLeroy',  # son surnom, ajouté par lui
                 # Photo carrée dans assets/ —
                 # à défaut, les initiales s'affichent.
                 "photo": "guillaume.png",
@@ -71,6 +71,8 @@ SLIDES = [
         "bees": [
             ("bee_cool.png", 11.75, 0.25, 1.1, 8),
             ("bee_grad.png", 11.6, 5.1, 1.25, -6),
+            # Clin d'œil de Guillaume à Sunny Tech, sous l'abeille à lunettes.
+            ("logo_sunny_tech.png", 11.95, 1.38, 1.11, 12),
         ],
         "notes": (
             "Mazlum : Head of Data chez GroupBees, GDE Cloud et Docker Captain. "

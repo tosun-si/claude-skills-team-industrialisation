@@ -434,7 +434,7 @@ SLIDES = [
         ),
         "kicker": "Le projet déclare ses conventions. Un seul fichier, relu en PR.",
         "notes": (
-            "pollen, notre CLI open source (Rust). Syntaxe inspirée de "
+            "pollen, notre CLI open source (Rust), écrite à deux. Syntaxe inspirée de "
             "pre-commit : une liste de sources, chacune épinglée. Il installe, "
             "rafraîchit ce qui a bougé et supprime ce qu'on a retiré. Sources "
             "git — SSH pour les repos privés — ou dossier local. Déployé dans "
@@ -915,17 +915,17 @@ CUES = {
     ),
     "pollen : les skills comme des dépendances": (
         "🎤 Guillaume\n"
-        "• CLI open source en Rust, pollen.yaml façon pre-commit\n"
+        "• CLI open source en Rust, écrite à deux avec Mazlum ; pollen.yaml façon pre-commit\n"
         "• update : installe, rafraîchit, supprime ce qu'on a retiré"
     ),
     "pollen, en pratique": (
         "🎤 Guillaume\n"
         "• Périmètre étroit : déplace des dossiers, valide la spec\n"
         "• Un skill écrit à la main n'est jamais écrasé\n"
-        "↪ Guillaume : « Et il installe au standard, là où chaque agent cherche. »"
+        "↪ Guillaume : « Reste à savoir où il installe tout ça. »"
     ),
     "pollen parle Agent Skills": (
-        "🎤 Guillaume\n"
+        "🎤 Mazlum\n"
         "• .claude/skills pour Claude Code, .agents/skills pour tous les autres\n"
         "• v0.7.0 : découverte par well-known URI, skills épinglés par digest\n"
         "↪ Mazlum : « Et la question à chaque fois : où est le lockfile ? »"

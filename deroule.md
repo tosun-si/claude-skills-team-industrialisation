@@ -17,7 +17,7 @@ Qui dit quoi, réplique par réplique : `dialogue.md`. Démo pas à pas :
 | 2 | Le problème | 4–6 | 3 min | Mazlum → Guillaume → Mazlum | GroupBees, l'équipe de 8, les nouvelles stacks qui divergent |
 | 3 | Du CLAUDE.md aux skills | 7–14 | 6 min 30 | Alternance | CLAUDE.md partagé qui grossit → skills chargés à la demande, anatomie, standards ouverts, domaines composables |
 | 4 | Partager les skills | 15–18 | 3 min 30 | Guillaume, puis Mazlum | Sync global, sa limite, par projet |
-| 5 | pollen | 19–25 | 6 min 30 | Guillaume, Mazlum sur le lockfile, npx skills et sa config | `pollen.yaml`, au standard (cibles, découverte well-known), pas de lockfile, npx skills, trois propriétaires, Spec Kit / BMAD |
+| 5 | pollen | 19–25 | 6 min 30 | Guillaume (19–20), puis Mazlum : standards, lockfile, npx skills, sa config | `pollen.yaml`, au standard (cibles, découverte well-known), pas de lockfile, npx skills, trois propriétaires, Spec Kit / BMAD |
 | 6 | **DÉMO (le cœur)** | 26 | 10 min | Alternance par beat | Même prompt sans / avec skills, delta, release |
 | 7 | Gouvernance | 27–31 | 6 min | Mazlum, Guillaume sur la fiabilité | Référents, skills périmés, CI, la doc d'un outil, Google |
 | 8 | Clôture | 32–34 | 2 min | Les deux | À retenir, de quoi l'essayer, punchline |

@@ -21,7 +21,7 @@ façon. Les notes de chaque slide gardent le fond, sous un repère de scène con
 | Le problème | 4–6 | Mazlum → Guillaume → Mazlum |
 | Du CLAUDE.md aux skills | 7–14 | Alternance |
 | Partager les skills | 15–18 | Guillaume, puis Mazlum |
-| pollen | 19–25 | Guillaume, Mazlum sur le lockfile, npx skills et sa config |
+| pollen | 19–25 | Guillaume (19–20), puis Mazlum : standards, lockfile, npx skills, sa config |
 | Démo | 26 | Alternance par beat |
 | Gouvernance | 27–31 | Mazlum, Guillaume sur la fiabilité |
 | Clôture | 32–34 | Les deux |
@@ -195,7 +195,7 @@ façon. Les notes de chaque slide gardent le fond, sous un repère de scène con
 
 ### 19 · pollen : les skills comme des dépendances — *Guillaume*
 
-> **Guillaume** : pollen, notre CLI open source, écrite en Rust. Un fichier,
+> **Guillaume** : pollen, la CLI open source qu'on a écrite à deux avec Mazlum, en Rust. Un fichier,
 > `pollen.yaml`, inspiré de pre-commit : une liste de sources, chacune épinglée.
 > `pollen update` installe, rafraîchit ce qui a bougé et supprime ce qu'on a
 > retiré.
@@ -206,17 +206,17 @@ façon. Les notes de chaque slide gardent le fond, sous un repère de scène con
 > les valide contre la spec. Il sait ce qu'il a installé : un skill écrit à la
 > main n'est jamais écrasé.
 >
-> Et il installe au standard, là où chaque agent cherche.
+> Reste à savoir où il installe tout ça.
 
-### 21 · pollen parle Agent Skills — *Guillaume*
+### 21 · pollen parle Agent Skills — *Mazlum*
 
-> **Guillaume** : pollen déploie dans `.claude/skills` pour Claude Code, et dans
+> **Mazlum** : pollen déploie dans `.claude/skills` pour Claude Code, et dans
 > `.agents/skills`, le dossier que lisent Copilot, Cursor, Codex ou Antigravity.
 > Et depuis la v0.7.0, il suit aussi le standard de découverte : une passerelle
 > ou un site publie ses skills sur une URL well-known, et pollen les installe,
 > épinglés par leur digest, comme une source git.
 >
-> **Mazlum** : Et la question qu'on nous pose à chaque fois : où est le lockfile ?
+> Et la question qu'on nous pose à chaque fois : où est le lockfile ?
 
 ### 22 · Épingler un commit… et pas de lockfile — *Mazlum*
 

@@ -210,6 +210,15 @@ SLIDES = [
             "voit en permanence, et ne lit le corps que si la tâche matche. "
             "C'est la progressive disclosure. Lu tel quel par Claude Code, "
             "Copilot, Cursor, Codex, Antigravity CLI."
+            " Ce qui est toujours chargé a un budget : Claude Code réserve 1 % de "
+            "la fenêtre de contexte à la liste des skills (noms + descriptions du "
+            "frontmatter), et coupe chaque entrée à 1 536 caractères. Au-delà du "
+            "budget, il retire d'abord les descriptions des skills les moins "
+            "utilisés (le nom reste), donc l'agent ne sait plus quand les "
+            "déclencher. D'où des descriptions courtes, le cas d'usage en tête. "
+            "/context montre la taille de la liste, /doctor les plus gros "
+            "contributeurs ; skillListingBudgetFraction ou skillOverrides "
+            "(name-only) pour arbitrer."
         ),
     },
     {
@@ -244,6 +253,32 @@ SLIDES = [
             "toujours, le SKILL.md au déclenchement, le reste seulement si "
             "besoin. Notre CI refuse tout autre dossier. → Bascule IDE sur "
             "skills-core pour ouvrir ces trois skills."
+        ),
+    },
+    {
+        "type": "bullets",
+        "title": "S'appuyer sur les standards",
+        "bullets": [
+            "Agent Skills : un format ouvert, SKILL.md (agentskills.io)",
+            "Lu tel quel par Claude Code, Copilot, Cursor, Codex, Antigravity CLI…",
+            "AGENTS.md pour le contexte du projet, SKILL.md pour les conventions",
+            "Vérifié en CI : skill-validator contrôle le format",
+        ],
+        "kicker": "Écrits une fois, lus par tous les agents : aucun lock-in.",
+        "bees": [("bee.png", 11.8, 0.3, 1.0, -10, True)],
+        "notes": (
+            "On s'appuie sur des standards ouverts, rien de propre à un outil. "
+            "Un skill, c'est un dossier avec un SKILL.md : le même fichier est lu "
+            "par Claude Code, Copilot, Cursor, Codex ou Antigravity CLI. Si "
+            "l'équipe change d'agent demain, les skills restent. AGENTS.md, lui aussi standard, porte le contexte durable "
+            "du projet ; les conventions vivent dans les skills. Claude Code "
+            "lit AGENTS.md nativement depuis la v2.1.277, mais seulement quand "
+            "le repo n'a pas de CLAUDE.md : on garde donc un CLAUDE.md d'une "
+            "ligne, @AGENTS.md, qui marche dans toutes les sessions et ne fait "
+            "jamais lire le fichier deux fois. Si on nous "
+            "parle d'Agent Plugins (le format de paquet, v1.0 en août 2026) : "
+            "on ne l'utilise pas. Il ne lit que skills/<nom>/, nos domaines "
+            "y seraient invisibles."
         ),
     },
     {
@@ -381,37 +416,6 @@ SLIDES = [
         ),
     },
     {
-        "type": "bullets",
-        "title": "S'appuyer sur les standards",
-        "bullets": [
-            "Agent Skills : un format ouvert, SKILL.md (agentskills.io)",
-            "Lu tel quel par Claude Code, Copilot, Cursor, Codex, Antigravity CLI…",
-            "AGENTS.md pour le contexte du projet, SKILL.md pour les conventions",
-            "Vérifié en CI : skill-validator contrôle le format",
-            "Ni installation ni épinglage dans le standard : c'est le rôle de pollen",
-        ],
-        "kicker": "Écrits une fois, lus par tous les agents : aucun lock-in.",
-        "bees": [("bee.png", 11.8, 0.3, 1.0, -10, True)],
-        "notes": (
-            "On s'appuie sur des standards ouverts, rien de propre à un outil. "
-            "Un skill, c'est un dossier avec un SKILL.md : le même fichier est lu "
-            "par Claude Code, Copilot, Cursor, Codex ou Antigravity CLI. pollen le "
-            "déploie dans .claude/skills et .agents/skills, le dossier commun "
-            "aux autres agents : Claude Code, lui, ne lit encore que "
-            ".claude/skills (vérifié sur la v2.1.303), d'où les deux cibles — et dans .github/skills si on veut Copilot : une ligne "
-            "dans pollen.yaml. Si l'équipe change d'agent demain, les skills "
-            "restent. AGENTS.md, lui aussi standard, porte le contexte durable "
-            "du projet ; les conventions vivent dans les skills. Claude Code "
-            "lit AGENTS.md nativement depuis la v2.1.277, mais seulement quand "
-            "le repo n'a pas de CLAUDE.md : on garde donc un CLAUDE.md d'une "
-            "ligne, @AGENTS.md, qui marche dans toutes les sessions et ne fait "
-            "jamais lire le fichier deux fois. Si on nous "
-            "parle d'Agent Plugins (le format de paquet, v1.0 en août 2026) : "
-            "on ne l'utilise pas. Il ne lit que skills/<nom>/, nos domaines "
-            "y seraient invisibles, et pollen n'en a pas besoin pour déployer."
-        ),
-    },
-    {
         "type": "code",
         "title": "pollen : les skills comme des dépendances",
         "code": (
@@ -454,6 +458,38 @@ SLIDES = [
             "enregistre ce qu'il a installé et quelle config possède le "
             "dossier : un skill écrit à la main n'est jamais écrasé, et une "
             "seconde config sur le même dossier est refusée."
+        ),
+    },
+    {
+        "type": "code",
+        "title": "pollen parle Agent Skills",
+        "code": (
+            "# Déployé là où chaque agent cherche ses skills\n"
+            ".claude/skills/    # Claude Code\n"
+            ".agents/skills/    # Copilot, Cursor, Codex, Antigravity…\n"
+            "\n"
+            "# Et la découverte par well-known URI (pollen v0.7.0)\n"
+            "repos:\n"
+            "  - well-known: https://gateway.example.com\n"
+            "    skills:                # /.well-known/agent-skills/index.json\n"
+            "      - name: code-review\n"
+            "        digest: sha256:3f2a9c…   # épinglé, comme un commit"
+        ),
+        "kicker": "Le standard pour le format, le standard pour la découverte.",
+        "notes": (
+            "pollen installe des skills au standard Agent Skills, là où les agents "
+            "les cherchent : .claude/skills pour Claude Code, qui ne lit encore "
+            "que ce dossier (vérifié sur la v2.1.303), et .agents/skills, le "
+            "dossier commun aux autres agents : Copilot, Cursor, Codex, "
+            "Antigravity, OpenCode. Une ligne dans pollen.yaml ajoute "
+            ".github/skills si on veut. Depuis la v0.7.0, pollen suit aussi le "
+            "standard de découverte « Agent Skills Discovery via Well-Known URIs » "
+            "(RFC de Cloudflare, v0.2.0) : une passerelle comme LiteLLM ou un "
+            "site de doc publie ses skills dans /.well-known/agent-skills/index.json, "
+            "et une entrée well-known: les déploie comme une source git. Chaque "
+            "skill s'épingle par le digest SHA-256 de son artefact ; outdated et "
+            "autoupdate marchent pareil. Les tokens viennent d'un fichier de "
+            "credentials utilisateur, jamais du pollen.yaml."
         ),
     },
     {
@@ -657,22 +693,30 @@ SLIDES = [
         "type": "code",
         "title": "La CI d'un module de skills",
         "code": (
-            "# .github/workflows/ci.yml d'un module : une seule ligne utile\n"
+            "# .github/workflows/ci.yml d'un module\n"
             "jobs:\n"
-            "  module:\n"
-            "    uses: groupbees/.github/.github/workflows/skills-module.yml@3b24f023…  # v1.1.0\n"
+            "  skills:\n"
+            "    runs-on: ubuntu-24.04\n"
+            "    steps:\n"
+            "      - uses: actions/checkout@3d3c42e5…        # v7.0.1\n"
+            "      - uses: groupbees/skill-action@0e139db7…  # v0.1.0\n"
+            "        with:\n"
+            "          skill-validator-version: v1.8.0\n"
+            "          pollen-version: v0.7.0\n"
             "\n"
-            "# ce que vérifie le workflow partagé, à chaque PR :\n"
-            "#   skill-validator --strict   spec, tokens, liens, descriptions\n"
-            "#   pollen validate            se déploie comme chez un consommateur\n"
-            "#   README généré · noms uniques · shellcheck"
+            "# à chaque PR : skill-validator --strict (spec, tokens, liens,\n"
+            "# descriptions) et pollen validate (se déploie comme chez vous)"
         ),
         "kicker": "Barre de review plus haute que pour du code : ça s'applique à tout.",
         "notes": (
             "skill-validator (agent-ecosystem, open source) : conformité à la "
             "spec, budget de tokens, liens cassés, fichiers orphelins, qualité "
-            "des descriptions. La CI vit dans un workflow partagé public, "
-            "épinglé par commit ; Dependabot ouvre la PR quand il évolue."
+            "des descriptions. pollen validate : le module se déploie comme "
+            "chez un consommateur, et deux skills du même nom sont refusés. Les "
+            "deux tournent dans une GitHub Action publique, groupbees/skill-action, "
+            "épinglée par commit et mise à jour par Dependabot ; elle installe les "
+            "outils aux versions demandées et vérifie leur checksum. Réutilisable "
+            "par n'importe quel repo de skills, pas seulement les nôtres."
         ),
     },
     {
@@ -830,7 +874,7 @@ CUES = {
     "Un skill, c'est un dossier": (
         "🎤 Guillaume\n"
         "• references/ : lu à la demande · assets/ : fichiers à copier · scripts/ : contrôles\n"
-        "↪ Mazlum : « Ce qui ne veut pas dire qu'on jette le CLAUDE.md. »"
+        "↪ Mazlum : « Et ce format, on ne l'a pas inventé. »"
     ),
     "CLAUDE.md monolithe vs skills": (
         "🎤 Mazlum\n"
@@ -861,13 +905,13 @@ CUES = {
         "🎤 Guillaume\n"
         "• On importe les skills comme des dépendances, + les skills du projet\n"
         "• La factory accueillera d'autres projets que Solis\n"
-        "↪ Mazlum : « À une condition : ne rien inventer de propriétaire. »"
+        "↪ Guillaume : « Il nous fallait l'outil pour les installer : pollen. »"
     ),
     "S'appuyer sur les standards": (
         "🎤 Mazlum\n"
         "• Agent Skills : Claude Code, Copilot, Cursor, Codex, Antigravity CLI\n"
         "• AGENTS.md pour le contexte ; on change d'agent, les skills restent\n"
-        "↪ « Il manquait l'outil pour les installer. Guillaume, raconte-leur pollen. »"
+        "↪ Mazlum : « Ce qui ne veut pas dire qu'on jette le CLAUDE.md. »"
     ),
     "pollen : les skills comme des dépendances": (
         "🎤 Guillaume\n"
@@ -878,6 +922,12 @@ CUES = {
         "🎤 Guillaume\n"
         "• Périmètre étroit : déplace des dossiers, valide la spec\n"
         "• Un skill écrit à la main n'est jamais écrasé\n"
+        "↪ Guillaume : « Et il installe au standard, là où chaque agent cherche. »"
+    ),
+    "pollen parle Agent Skills": (
+        "🎤 Guillaume\n"
+        "• .claude/skills pour Claude Code, .agents/skills pour tous les autres\n"
+        "• v0.7.0 : découverte par well-known URI, skills épinglés par digest\n"
         "↪ Mazlum : « Et la question à chaque fois : où est le lockfile ? »"
     ),
     "Épingler un commit… et pas de lockfile": (
@@ -931,7 +981,7 @@ CUES = {
     "La CI d'un module de skills": (
         "🎤 Guillaume\n"
         "• skill-validator : spec, liens, orphelins, taille\n"
-        "• Workflow partagé épinglé par SHA, Dependabot\n"
+        "• groupbees/skill-action : skill-validator + pollen validate, épinglée par SHA, Dependabot\n"
         "↪ Mazlum : « Et on a appris une chose en route. »"
     ),
     "La doc d'un outil est aussi un skill": (

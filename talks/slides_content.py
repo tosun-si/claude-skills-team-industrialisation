@@ -766,7 +766,7 @@ SLIDES = [
             "Le skill pollen vit dans le repo pollen, versionné avec lui",
             "Installé… par pollen, au niveau projet ou machine",
             "Les modules ne gardent qu'un lien",
-            "Même règle pour la CI : une action partagée, épinglée",
+            "La CI aussi : une seule action, appelée par chaque module",
         ],
         "kicker": "Une source par sujet. Sinon le monolithe revient, en N copies.",
         "bees": [("bee_astro.png", 11.85, 0.2, 1.1, -8)],

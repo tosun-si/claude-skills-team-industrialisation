@@ -574,6 +574,8 @@ SLIDES = [
         },
         "kicker": "Eux gèrent vos agents, nous vos skills. Même standard dessous.",
         "notes": (
+            "On nous a posé la question à Cloud Nord ; Guillaume ne connaissait pas "
+            "APM, on l'a étudié après le talk. "
             "APM, l'Agent Package Manager de Microsoft (open source, v0.35) : un "
             "apm.yml façon package.json qui installe toute la configuration des "
             "agents (skills, instructions, prompts, agents, hooks, serveurs MCP) "
@@ -982,6 +984,7 @@ CUES = {
     ),
     "Et APM ?": (
         "🎤 Guillaume\n"
+        "• « La question est tombée à Cloud Nord. Honnêtement, je ne connaissais pas APM : on est allés regarder après. »\n"
         "• Bien plus large : toute la config des agents, lockfile, politiques d'org\n"
         "• pollen : uniquement des skills, épinglés, sans résolveur\n"
         "• Pour gouverner toute la config des agents d'une grande orga : regardez APM\n"

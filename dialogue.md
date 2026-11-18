@@ -241,8 +241,10 @@ façon. Les notes de chaque slide gardent le fond, sous un repère de scène con
 
 ### 24 · Et APM ? — *Guillaume*
 
-> **Guillaume** : APM, l'Agent Package Manager de Microsoft, va beaucoup plus
-> loin : toute la configuration des agents, skills, prompts, serveurs MCP, avec
+> **Guillaume** : On nous a posé la question à Cloud Nord. Honnêtement, je ne
+> connaissais pas APM : on est allés regarder après le talk. L'Agent Package
+> Manager de Microsoft va beaucoup plus loin : toute la configuration des
+> agents, skills, prompts, serveurs MCP, avec
 > un lockfile, des dépendances transitives et des politiques d'organisation.
 > pollen, lui, ne fait que des skills, épinglés sur un commit, sans résolveur.
 > Si vous voulez gouverner toute la config de vos agents dans une grande

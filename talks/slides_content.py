@@ -114,7 +114,7 @@ SLIDES = [
         "image": "bee_grad.png",
         "bullets": [
             "Une équipe de 8 personnes",
-            "Quelques seniors… un junior… et un stagiaire",
+            "Des seniors, un chercheur IA, un junior, un stagiaire",
             "Les seniors ont posé les fondations : backend, cloud, IaC",
             "Des concepts pas évidents à s'approprier pour tout le monde",
         ],
@@ -552,6 +552,43 @@ SLIDES = [
         ),
     },
     {
+        "type": "compare",
+        "title": "Et APM ?",
+        "left": {
+            "title": "APM (Microsoft)",
+            "items": [
+                "Toute la config des agents : skills, prompts, MCP…",
+                "Lockfile + dépendances transitives",
+                "Politiques d'organisation, audit, SBOM",
+                "Large adoption, porté par Microsoft",
+            ],
+        },
+        "right": {
+            "title": "pollen",
+            "items": [
+                "Uniquement des skills",
+                "Pas de résolveur : le SHA est le lock",
+                "Un binaire, un fichier",
+                "Découverte well-known, épinglée par digest",
+            ],
+        },
+        "kicker": "Eux gèrent vos agents, nous vos skills. Même standard dessous.",
+        "notes": (
+            "APM, l'Agent Package Manager de Microsoft (open source, v0.35) : un "
+            "apm.yml façon package.json qui installe toute la configuration des "
+            "agents (skills, instructions, prompts, agents, hooks, serveurs MCP) "
+            "vers Copilot, Claude Code, Cursor, Codex, Gemini… Il sait installer "
+            "nos catalogues, sous-dossiers par domaine compris. En plus : un "
+            "lockfile avec hash du contenu, des dépendances transitives, un scan "
+            "des caractères Unicode cachés, apm audit, un SBOM et des politiques "
+            "d'organisation (apm-policy.yml). Pour gouverner toute la config des "
+            "agents dans une grande organisation, c'est l'outil à regarder. "
+            "pollen fait un seul métier : déployer des skills épinglés sur un "
+            "commit, sans résolveur, depuis un binaire et un fichier. Les deux "
+            "installent les mêmes SKILL.md : on peut passer de l'un à l'autre."
+        ),
+    },
+    {
         "type": "code",
         "title": "Un fichier, trois propriétaires",
         "code": (
@@ -727,7 +764,7 @@ SLIDES = [
             "Le skill pollen vit dans le repo pollen, versionné avec lui",
             "Installé… par pollen, au niveau projet ou machine",
             "Les modules ne gardent qu'un lien",
-            "Même règle pour la CI : un workflow partagé, épinglé",
+            "Même règle pour la CI : une action partagée, épinglée",
         ],
         "kicker": "Une source par sujet. Sinon le monolithe revient, en N copies.",
         "bees": [("bee_astro.png", 11.85, 0.2, 1.1, -8)],
@@ -839,7 +876,7 @@ CUES = {
     ),
     "L'équipe": (
         "🎤 Guillaume\n"
-        "• 8 personnes : quelques seniors, un junior, un stagiaire\n"
+        "• 8 personnes : des seniors, un chercheur IA, un junior, un stagiaire\n"
         "• Grâce à Claude, tout le monde fait évoluer les stacks : la bonne nouvelle\n"
         "↪ Mazlum : « La mauvaise, c'est la suite. »"
     ),
@@ -937,11 +974,18 @@ CUES = {
         "↪ Mazlum : « Et l'autre question, sous mon post LinkedIn : pourquoi pas npx skills ? »"
     ),
     "Et npx skills ?": (
-        "🎤 Mazlum, puis Guillaume, Mazlum conclut\n"
-        "• Mazlum : super outil, bien plus large, sait installer nos catalogues privés\n"
-        "• Guillaume : avant pollen, seul outil open source trouvé, on l'a regardé\n"
-        "• Guillaume : CLI + lock vs fichier déclaratif, sans package.json, épinglé sur une release\n"
-        "• Mazlum : les deux installent les mêmes skills, aucun lock-in"
+        "🎤 Mazlum\n"
+        "• Super outil, bien plus large, sait installer nos catalogues privés\n"
+        "• CLI + lock vs fichier déclaratif, sans package.json, épinglé sur une release\n"
+        "• Les deux installent les mêmes skills, aucun lock-in\n"
+        "↪ Mazlum : « Et l'autre nom qui revient : APM, chez Microsoft. »"
+    ),
+    "Et APM ?": (
+        "🎤 Guillaume\n"
+        "• Bien plus large : toute la config des agents, lockfile, politiques d'org\n"
+        "• pollen : uniquement des skills, épinglés, sans résolveur\n"
+        "• Pour gouverner toute la config des agents d'une grande orga : regardez APM\n"
+        "↪ Guillaume : « Et sur une seule machine, ça donne quoi ? »"
     ),
     "Un fichier, trois propriétaires": (
         "🎤 Mazlum\n"

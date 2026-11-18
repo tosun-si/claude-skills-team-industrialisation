@@ -1,7 +1,7 @@
 # Déroulé du talk (timé)
 
 **Titre :** *Industrialiser l'IA en équipe : des skills qui encodent vos conventions*
-**Speakers :** Mazlum Tosun & Guillaume Leroy · 34 slides
+**Speakers :** Mazlum Tosun & Guillaume Leroy · 35 slides
 
 Créneaux : **DevFest Toulouse ≈ 45 min**, **Cloud Nord ≈ 50 min** (à
 confirmer). Cœur de **≈ 38 min**, le reste en Q&A. Fil rouge unique : **le
@@ -17,10 +17,10 @@ Qui dit quoi, réplique par réplique : `dialogue.md`. Démo pas à pas :
 | 2 | Le problème | 4–6 | 3 min | Mazlum → Guillaume → Mazlum | GroupBees, l'équipe de 8, les nouvelles stacks qui divergent |
 | 3 | Du CLAUDE.md aux skills | 7–14 | 6 min 30 | Alternance | CLAUDE.md partagé qui grossit → skills chargés à la demande, anatomie, standards ouverts, domaines composables |
 | 4 | Partager les skills | 15–18 | 3 min 30 | Guillaume, puis Mazlum | Sync global, sa limite, par projet |
-| 5 | pollen | 19–25 | 6 min 30 | Guillaume (19–20), puis Mazlum : standards, lockfile, npx skills, sa config | `pollen.yaml`, au standard (cibles, découverte well-known), pas de lockfile, npx skills, trois propriétaires, Spec Kit / BMAD |
-| 6 | **DÉMO (le cœur)** | 26 | 10 min | Alternance par beat | Même prompt sans / avec skills, delta, release |
-| 7 | Gouvernance | 27–31 | 6 min | Mazlum, Guillaume sur la fiabilité | Référents, skills périmés, CI, la doc d'un outil, Google |
-| 8 | Clôture | 32–34 | 2 min | Les deux | À retenir, de quoi l'essayer, punchline |
+| 5 | pollen | 19–26 | 7 min 30 | Guillaume, Mazlum (standards, lockfile, npx skills), Guillaume (APM) | `pollen.yaml`, au standard (cibles, découverte well-known), pas de lockfile, npx skills, APM, trois propriétaires, Spec Kit / BMAD |
+| 6 | **DÉMO (le cœur)** | 27 | 10 min | Alternance par beat | Même prompt sans / avec skills, delta, release |
+| 7 | Gouvernance | 28–32 | 6 min | Mazlum, Guillaume sur la fiabilité | Référents, skills périmés, CI, la doc d'un outil, Google |
+| 8 | Clôture | 33–35 | 2 min | Les deux | À retenir, de quoi l'essayer, punchline |
 | — | Q&A | | 6–12 min | Voir le tableau de `dialogue.md` | |
 
 ---
@@ -56,19 +56,22 @@ Qui dit quoi, réplique par réplique : `dialogue.md`. Démo pas à pas :
 - Limite : nos règles s'appliquent partout, clients compris → choisir projet
   par projet, comme des dépendances.
 
-## 5. pollen — 6 min 30 (slides 19–25)
+## 5. pollen — 7 min 30 (slides 19–26)
 
 - `pollen.yaml` façon pre-commit, `pollen update`, périmètre étroit.
 - **Au standard** : `.claude/skills` + `.agents/skills`, et la découverte
   par well-known URI (v0.7.0), épinglée par digest.
 - **Pas de lockfile** (Mazlum) : le SHA épinglé est le lock ; `outdated` →
   `autoupdate` → PR.
-- **Et npx skills ?** Guillaume l'avait regardé avant pollen : la différence
-  est dans le modèle (déclaratif, sans package.json, épinglé sur une release).
+- **Et npx skills ?** (Mazlum) La différence est dans le modèle (déclaratif,
+  sans package.json, épinglé sur une release).
+- **Et APM ?** (Guillaume) Bien plus large : toute la config des agents,
+  lockfile, politiques d'org. pollen ne fait que des skills. On le dit
+  franchement : pour gouverner toute la config d'une grande orga, APM.
 - Ma config machine : trois propriétaires dans un fichier.
 - Spec Kit / BMAD : même format, autre contenu (processus vs conventions).
 
-## 6. DÉMO — le cœur — 10 min (slide 26)
+## 6. DÉMO — le cœur — 10 min (slide 27)
 
 > Pas de déploiement en live. Tout est pré-chauffé, les deux sorties sont
 > pré-capturées. Détail dans `script-demo.md`.
@@ -86,7 +89,7 @@ AVEC génère (~3 min) pendant qu'on commente SANS.**
 | 5 Delta (climax) | 1 min 30 | Ping-pong | « L'IA n'est pas devenue meilleure. Les règles sont là. » |
 | 6 Release | 1 min | Mazlum → Guillaume | Une vraie release d'un repo existant : tag, PR labellisées, notes classées |
 
-## 7. Gouvernance — 6 min (slides 27–31)
+## 7. Gouvernance — 6 min (slides 28–32)
 
 - **Une lib de skills, ça se gouverne** : du code, versionné, relu en PR ;
   blast radius énorme. Relecture par les **référents** (transverses : Mazlum et
@@ -101,7 +104,7 @@ AVEC génère (~3 min) pendant qu'on commente SANS.**
 - **Comment fait Google ?** Evals obligatoires et hebdomadaires : notre
   prochaine marche.
 
-## 8. Clôture — 2 min (slides 32–34)
+## 8. Clôture — 2 min (slides 33–35)
 
 - À retenir, un point chacun : skills plutôt qu'un CLAUDE.md géant ; par
   projet, épinglés ; gouvernés comme du code.
@@ -116,8 +119,8 @@ AVEC génère (~3 min) pendant qu'on commente SANS.**
 
 ## Ajuster à la répétition
 
-- **Trop long** : passer en annexe « Et Spec Kit, BMAD ? » (slide 25) et « La
-  doc d'un outil est aussi un skill » (slide 30) ; écourter le Beat 6.
+- **Trop long** : passer en annexe « Et Spec Kit, BMAD ? » (slide 26) et « La
+  doc d'un outil est aussi un skill » (slide 31) ; écourter le Beat 6.
 - **Cloud Nord (≈ 50 min)** : les 5 minutes de plus vont aux questions, pas au
   contenu.
 - La démo est le seul bloc à durée variable : chronométrer AVEC sur le réseau

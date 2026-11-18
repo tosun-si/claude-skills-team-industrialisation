@@ -1,6 +1,6 @@
 # Dialogue Mazlum × Guillaume (proposition, à affiner)
 
-Répartition des 34 slides entre les deux speakers, avec les passages de relais.
+Répartition des 35 slides entre les deux speakers, avec les passages de relais.
 Le texte est une base orale, pas un script à réciter : chacun le reformule à sa
 façon. Les notes de chaque slide gardent le fond, sous un repère de scène condensé
 (`CUES` dans `talks/slides_content.py`).
@@ -21,10 +21,10 @@ façon. Les notes de chaque slide gardent le fond, sous un repère de scène con
 | Le problème | 4–6 | Mazlum → Guillaume → Mazlum |
 | Du CLAUDE.md aux skills | 7–14 | Alternance |
 | Partager les skills | 15–18 | Guillaume, puis Mazlum |
-| pollen | 19–25 | Guillaume (19–20), puis Mazlum : standards, lockfile, npx skills, sa config |
-| Démo | 26 | Alternance par beat |
-| Gouvernance | 27–31 | Mazlum, Guillaume sur la fiabilité |
-| Clôture | 32–34 | Les deux |
+| pollen | 19–26 | Guillaume (19–20), Mazlum (21–23), Guillaume sur APM (24), Mazlum (25), Guillaume (26) |
+| Démo | 27 | Alternance par beat |
+| Gouvernance | 28–32 | Mazlum, Guillaume sur la fiabilité |
+| Clôture | 33–35 | Les deux |
 
 ---
 
@@ -74,7 +74,7 @@ façon. Les notes de chaque slide gardent le fond, sous un repère de scène con
 
 ### 5 · L'équipe — *Guillaume*
 
-> **Guillaume** : On est huit : quelques seniors, un junior, un stagiaire. Les
+> **Guillaume** : On est huit : des seniors, un chercheur en IA, un junior, un stagiaire. Les
 > seniors ont posé le premier backend, les fondations cloud et l'IaC. Et grâce à
 > Claude, tout le monde a pu faire évoluer ces stacks. Ça, c'est la bonne
 > nouvelle.
@@ -228,21 +228,30 @@ façon. Les notes de chaque slide gardent le fond, sous un repère de scène con
 >
 > Et l'autre question, sous mon post LinkedIn : pourquoi pas npx skills ?
 
-### 23 · Et npx skills ? — *Mazlum, Guillaume conclut*
+### 23 · Et npx skills ? — *Mazlum*
 
 > **Mazlum** : npx skills, de Vercel, est un super outil, bien plus large que le
-> nôtre. Et il sait installer nos catalogues privés aussi.
+> nôtre. Et il sait installer nos catalogues privés aussi. La différence est dans
+> le modèle. Eux : une CLI qui trace ce qu'on a installé dans un lockfile. Nous :
+> un fichier déclaratif façon pre-commit, à la racine de n'importe quel repo,
+> Terraform ou Python, sans package.json. Et épinglé sur le commit d'une
+> release. Les deux installent les mêmes skills : aucun lock-in.
 >
-> **Guillaume** : Quand j'ai cherché ce qui existait en open source pour
-> installer des skills, il n'y avait que celui-là. On l'a regardé, et la
-> différence est dans le modèle. Eux : une CLI qui trace ce qu'on a installé
-> dans un lockfile. Nous : un fichier déclaratif façon
-> pre-commit, à la racine de n'importe quel repo, Terraform ou Python, sans
-> package.json. Et épinglé sur le commit d'une release.
->
-> **Mazlum** : Et les deux installent les mêmes skills. Aucun lock-in.
+> Et l'autre nom qui revient : APM, chez Microsoft.
 
-### 24 · Un fichier, trois propriétaires — *Mazlum*
+### 24 · Et APM ? — *Guillaume*
+
+> **Guillaume** : APM, l'Agent Package Manager de Microsoft, va beaucoup plus
+> loin : toute la configuration des agents, skills, prompts, serveurs MCP, avec
+> un lockfile, des dépendances transitives et des politiques d'organisation.
+> pollen, lui, ne fait que des skills, épinglés sur un commit, sans résolveur.
+> Si vous voulez gouverner toute la config de vos agents dans une grande
+> organisation, regardez APM. Même standard dessous : on passe de l'un à
+> l'autre.
+>
+> Et sur une seule machine, ça donne quoi ?
+
+### 25 · Un fichier, trois propriétaires — *Mazlum*
 
 > **Mazlum** : Ma vraie config machine : des modules de l'orga, privés et
 > publics, le skill de pollen lui-même, et un module perso sur mon compte. Les
@@ -250,7 +259,7 @@ façon. Les notes de chaque slide gardent le fond, sous un repère de scène con
 >
 > **Guillaume** : Et on nous demande aussi : vous réinventez Spec Kit ?
 
-### 25 · Et Spec Kit, BMAD ? — *Guillaume*
+### 26 · Et Spec Kit, BMAD ? — *Guillaume*
 
 > **Guillaume** : Spec Kit et BMAD sont eux aussi livrés en Agent Skills, mais
 > ils encodent un processus : spec, plan, tâches. Nous, on encode des
@@ -266,7 +275,7 @@ Deux terminaux côte à côte : SANS à gauche, AVEC à droite. Celui qui pilote
 commente pas, l'autre raconte pour la salle. On enchaîne sans attendre : SANS
 génère pendant `pollen update`, AVEC génère pendant qu'on commente SANS.
 
-### 26 · Même prompt, sans puis avec les skills
+### 27 · Même prompt, sans puis avec les skills
 
 **Beat 0 · Cadrage (30 s)** — *Mazlum parle*
 
@@ -344,7 +353,7 @@ pilote reste concentré.
 
 ## Gouvernance
 
-### 27 · Une lib de skills, ça se gouverne — *Mazlum*
+### 28 · Une lib de skills, ça se gouverne — *Mazlum*
 
 > **Mazlum** : Les skills, c'est du code : versionnés, relus en PR. Et le blast
 > radius est énorme : un skill s'applique à tout ce qu'on génère. Qui relit ?
@@ -353,7 +362,7 @@ pilote reste concentré.
 >
 > **Guillaume** : Et même relu, un skill finit par vieillir.
 
-### 28 · Quand un skill périme — *Guillaume*
+### 29 · Quand un skill périme — *Guillaume*
 
 > **Guillaume** : Une règle périmée n'échoue pas : elle apprend le mauvais
 > pattern à l'agent, en silence. Ce qui pourrit, c'est le volatil : les flags,
@@ -366,7 +375,7 @@ pilote reste concentré.
 > **Guillaume** : Et quand une règle peut devenir un check, on en fait un. Elle
 > casse fort en CI au lieu de pourrir. Ce qu'on n'a pas encore : des evals.
 
-### 29 · La CI d'un module de skills — *Guillaume*
+### 30 · La CI d'un module de skills — *Guillaume*
 
 > **Guillaume** : Chaque module de skills a sa CI, une GitHub Action qu'on a
 > publiée : groupbees/skill-action. skill-validator contrôle la spec, les liens
@@ -375,7 +384,7 @@ pilote reste concentré.
 >
 > **Mazlum** : Et on a appris une chose en route.
 
-### 30 · La doc d'un outil est aussi un skill — *Mazlum*
+### 31 · La doc d'un outil est aussi un skill — *Mazlum*
 
 > **Mazlum** : À la première montée de version de pollen, il a fallu retoucher
 > treize fichiers dans nos modules. Le CLAUDE.md monolithique qu'on dénonce…
@@ -383,7 +392,7 @@ pilote reste concentré.
 >
 > **Guillaume** : Et pour aller plus loin, on a regardé chez les gros.
 
-### 31 · Comment fait Google ? — *Mazlum*
+### 32 · Comment fait Google ? — *Mazlum*
 
 > **Mazlum** : Google a publié comment ils gèrent leurs skills. « Skills are
 > products, not snippets. » Des evals obligatoires, hebdomadaires, sur plusieurs
@@ -394,7 +403,7 @@ pilote reste concentré.
 
 ## Clôture
 
-### 32 · À retenir — *un point chacun, puis le troisième à deux*
+### 33 · À retenir — *un point chacun, puis le troisième à deux*
 
 > **Mazlum** : Un : les conventions dans des skills, chargés à la demande, pas
 > dans un CLAUDE.md géant.
@@ -405,7 +414,7 @@ pilote reste concentré.
 >
 > **Guillaume** : Relecture, CI… et bientôt des evals.
 
-### 33 · Essayez-le — *Mazlum ou Guillaume, à répartir*
+### 34 · Essayez-le — *Mazlum ou Guillaume, à répartir*
 
 > De quoi l'essayer ce soir : pollen, et nos skills de la démo, en public
 > (`tosun-si/skills-core`, rangé par domaines). Le `pollen.yaml` du README
@@ -414,7 +423,7 @@ pilote reste concentré.
 *(Laisser 10 secondes pour scanner. Aux questions, revenir sur cette slide si
 on demande un lien.)*
 
-### 34 · Pas par magie. — *les deux*
+### 35 · Pas par magie. — *les deux*
 
 > **Mazlum** : Ce n'est pas par magie que l'IA a codé comme nous.
 >

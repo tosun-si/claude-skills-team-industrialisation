@@ -1020,10 +1020,10 @@ CUES = {
         "↪ Guillaume : « Et même relu, un skill finit par vieillir. »"
     ),
     "Quand un skill périme": (
-        "🎤 Guillaume, Mazlum, Guillaume\n"
+        "🎤 Guillaume\n"
         "• Une règle périmée n'échoue pas : elle apprend le mauvais pattern (run-all → run --all)\n"
-        "• Mazlum : le factuel, un agent le repère ; « encore notre convention ? » reste humain\n"
-        "• Guillaume : une règle qui peut devenir un check en devient un"
+        "• Le factuel, un agent le repère ; « encore notre convention ? » reste humain\n"
+        "• Une règle qui peut devenir un check en devient un"
     ),
     "La CI d'un module de skills": (
         "🎤 Guillaume\n"

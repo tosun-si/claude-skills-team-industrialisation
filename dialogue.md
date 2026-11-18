@@ -369,12 +369,10 @@ pilote reste concentré.
 > **Guillaume** : Une règle périmée n'échoue pas : elle apprend le mauvais
 > pattern à l'agent, en silence. Ce qui pourrit, c'est le volatil : les flags,
 > les versions. On l'a vécu : un skill Terragrunt avec `run-all`, alors que le
-> CLI impose `run --all`.
+> CLI impose `run --all`. Ça, un agent le repère très bien. « Est-ce encore
+> notre convention ? », beaucoup moins : ça reste humain.
 >
-> **Mazlum** : Ça, un agent le repère très bien. « Est-ce encore notre
-> convention ? », beaucoup moins : ça reste humain.
->
-> **Guillaume** : Et quand une règle peut devenir un check, on en fait un. Elle
+> Et quand une règle peut devenir un check, on en fait un. Elle
 > casse fort en CI au lieu de pourrir. Ce qu'on n'a pas encore : des evals.
 
 ### 30 · La CI d'un module de skills — *Guillaume*

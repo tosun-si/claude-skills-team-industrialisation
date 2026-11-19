@@ -82,12 +82,12 @@ SLIDES = [
     },
     {
         "type": "image",
-        "title": "En direct du TechCast",
-        "image_path": "assets/jt_satirique.jpg",
+        "title": "En direct du SkillsCast",
+        "image_path": "assets/jt_skillscast_gta.jpg",
         "notes": (
-            "Clin d'œil façon Guignols de l'info, on ne s'y attarde pas : "
-            "« Comment GroupBees a standardisé ses conventions avec les Agent "
-            "Skills ? C'est notre sujet. »"
+            "Clin d'œil façon Guignols, version GTA VI, on ne s'y attarde pas. "
+            "On lit le bandeau : « GTA VI est enfin là : comment GroupBees a "
+            "standardisé les skills avec Agent Skills ? » C'est notre sujet."
         ),
     },
     # ── Contexte GroupBees ──────────────────────────────────────────────────
@@ -865,9 +865,9 @@ CUES = {
         "• Guillaume présente Mazlum (« écrit les règles… et les oublie dans son Dockerfile »)\n"
         "↪ Mazlum : « C'est exactement le sujet du talk. »"
     ),
-    "En direct du TechCast": (
+    "En direct du SkillsCast": (
         "🎤 Les deux, 10 secondes\n"
-        "• Clin d'œil, on ne s'attarde pas : on lit le bandeau\n"
+        "• Clin d'œil GTA VI, on ne s'attarde pas : on lit le bandeau\n"
         "↪ Mazlum enchaîne sur le contexte GroupBees"
     ),
     "Le contexte : une plateforme d'API": (

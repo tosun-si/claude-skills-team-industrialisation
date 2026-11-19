@@ -49,12 +49,12 @@ façon. Les notes de chaque slide gardent le fond, sous un repère de scène con
 >
 > **Mazlum** : C'est exactement le sujet du talk.
 
-### 3 · En direct du TechCast — *les deux, 10 secondes*
+### 3 · En direct du SkillsCast — *les deux, 10 secondes*
 
-> *(l'image façon Guignols s'affiche, on laisse rire la salle)*
+> *(l'image façon Guignols, version GTA VI, s'affiche : on laisse rire la salle)*
 >
-> **Guillaume** : Au programme du JT : comment GroupBees a standardisé ses
-> conventions avec les Agent Skills.
+> **Guillaume** : GTA VI est enfin là… et au programme : comment GroupBees a
+> standardisé ses skills avec Agent Skills.
 >
 > **Mazlum** : Et ça commence par notre plateforme.
 

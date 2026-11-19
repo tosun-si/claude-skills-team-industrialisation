@@ -13,7 +13,7 @@ Qui dit quoi, réplique par réplique : `dialogue.md`. Démo pas à pas :
 
 | # | Bloc | Slides | Durée | Qui | Objectif |
 |---|---|---|---|---|---|
-| 1 | Ouverture | 1–3 | 2 min | Les deux | Titre, qui on est, le clin d'œil TechCast |
+| 1 | Ouverture | 1–3 | 2 min | Les deux | Titre, qui on est, le clin d'œil SkillsCast (GTA VI) |
 | 2 | Le problème | 4–6 | 3 min | Mazlum → Guillaume → Mazlum | GroupBees, l'équipe de 8, les nouvelles stacks qui divergent |
 | 3 | Du CLAUDE.md aux skills | 7–14 | 6 min 30 | Alternance | CLAUDE.md partagé qui grossit → skills chargés à la demande, anatomie, standards ouverts, domaines composables |
 | 4 | Partager les skills | 15–18 | 3 min 30 | Guillaume, puis Mazlum | Sync global, sa limite, par projet |
@@ -29,7 +29,7 @@ Qui dit quoi, réplique par réplique : `dialogue.md`. Démo pas à pas :
 
 - **Message :** générer du code avec l'IA = trivial ; le faire *aux conventions
   de l'équipe* = autre histoire.
-- Chacun présente l'autre (slide 2), puis 10 secondes sur l'image TechCast
+- Chacun présente l'autre (slide 2), puis 10 secondes sur l'image SkillsCast (GTA VI)
   façon Guignols (slide 3) : on lit le bandeau, on enchaîne.
 
 ## 2. Le problème — 3 min (slides 4–6)

@@ -10,7 +10,7 @@ tirets longs.
 ## Elevator pitch (« Why should this talk be selected? »)
 
 ```
-C'est un retour d'expérience réel, pas un tutoriel. Toute notre équipe code avec Claude Code, et on montre comment on a transformé nos conventions en skills partagés, versionnés et relus comme du code. Tout est en production chez nous, et les outils sont open source.
+Ce talk est notre retour d'expérience chez GroupBees : comment on a industrialisé notre usage de l'IA en partageant nos conventions sous forme de skills, versionnés et relus comme du code. Et les outils qu'on a construits pour ça sont open source.
 
 Le talk a déjà fait ses preuves : au DevFest Toulouse 2026, on l'a donné dans le grand amphi devant une salle quasiment pleine, avec de très bons retours et beaucoup d'échanges avec le public, encore longtemps après le talk. Les notes sont sur la page du talk : https://devfesttoulouse.fr/en/conferences/industrialiser-l-ia-en-equipe-des-skills-qui-encodent-vos-conventions
 

@@ -1,5 +1,6 @@
 # Soumission CFP — Devoxx France
 
+Track : AI & Agentic Systems (Development Practices possible, voir les notes).
 Titre : **Industrialiser l'IA en équipe : des skills qui encodent vos conventions**
 (inchangé). Abstract (1 200 caractères max) : section « Devoxx France » de
 [`abstract.md`](abstract.md).
@@ -47,4 +48,6 @@ On présente à deux (Mazlum Tosun et Guillaume Leroy) : deux micros, idéalemen
 La démo est en live depuis notre laptop : sortie HDMI ou USB-C, et un accès internet stable. On a un plan B (partage de connexion 5G et sorties de démo pré-enregistrées), donc une coupure réseau ne bloque pas le talk.
 
 Format visé : conférence de 45 minutes. Le talk peut aussi tenir en Tools-in-Action de 30 minutes, en gardant la démo et en resserrant la partie gouvernance.
+
+Proposé en AI & Agentic Systems, mais le talk parle surtout de pratiques d'équipe (conventions, revue, versioning) : il a aussi toute sa place en Development Practices si ça vous arrange pour le programme.
 ```

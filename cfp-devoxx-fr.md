@@ -49,5 +49,5 @@ La démo est en live depuis notre laptop : sortie HDMI ou USB-C, et un accès in
 
 Format visé : conférence de 45 minutes. Le talk peut aussi tenir en Tools-in-Action de 30 minutes, en gardant la démo et en resserrant la partie gouvernance.
 
-Proposé en AI & Agentic Systems, mais le talk parle surtout de pratiques d'équipe (conventions, revue, versioning) : il a aussi toute sa place en Development Practices si ça vous arrange pour le programme.
+Proposé en AI & Agentic Systems, mais le talk parle aussi beaucoup de pratiques d'équipe (conventions, revue, versioning) : il pourrait aller en Development Practices si ça vous arrange pour le programme.
 ```

@@ -44,7 +44,7 @@ Côté speakers, je suis GDE Cloud et Docker Captain, et je parle régulièremen
 ```
 On présente à deux (Mazlum Tosun et Guillaume Leroy) : deux micros, idéalement des micros casque, car on alterne la parole et le clavier pendant la démo.
 
-La démo est en live depuis notre laptop : sortie HDMI ou USB-C, et un accès internet stable. On a un plan B (partage de connexion 4G et sorties de démo pré-enregistrées), donc une coupure réseau ne bloque pas le talk.
+La démo est en live depuis notre laptop : sortie HDMI ou USB-C, et un accès internet stable. On a un plan B (partage de connexion 5G et sorties de démo pré-enregistrées), donc une coupure réseau ne bloque pas le talk.
 
 Format visé : conférence de 45 minutes. Le talk peut aussi tenir en Tools-in-Action de 30 minutes, en gardant la démo et en resserrant la partie gouvernance.
 ```

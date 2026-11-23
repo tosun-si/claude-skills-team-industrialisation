@@ -35,6 +35,7 @@ en continu — sinon on recrée le monolithe ingérable, juste éclaté en N fic
 | Fichier | Rôle |
 |---|---|
 | [`abstract.md`](abstract.md) | Titre choisi + abstract (version courante) |
+| [`cfp-devoxx-fr.md`](cfp-devoxx-fr.md) | Devoxx France : elevator pitch, références, notes (texte brut à coller) |
 | [`deroule.md`](deroule.md) | Déroulé timé du talk |
 | [`script-demo.md`](script-demo.md) | Runbook beat-par-beat de la démo |
 | [`demo-prep.md`](demo-prep.md) | Checklist anti-panne |

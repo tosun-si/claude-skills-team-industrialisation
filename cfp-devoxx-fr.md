@@ -1,0 +1,48 @@
+# Soumission CFP — Devoxx France
+
+Titre : **Industrialiser l'IA en équipe : des skills qui encodent vos conventions**
+(inchangé). Abstract (1 200 caractères max) : section « Devoxx France » de
+[`abstract.md`](abstract.md).
+
+Tous les champs sont en **texte brut** : pas de gras, pas de backticks, pas de
+tirets longs.
+
+## Elevator pitch (« Why should this talk be selected? »)
+
+```
+C'est un retour d'expérience réel, pas un tutoriel. Toute notre équipe code avec Claude Code, et on montre comment on a transformé nos conventions en skills partagés, versionnés et relus comme du code. Tout est en production chez nous, et les outils sont open source.
+
+Le talk a déjà fait ses preuves : au DevFest Toulouse 2026, on l'a donné dans le grand amphi devant une salle quasiment pleine, avec de très bons retours et beaucoup d'échanges avec le public, encore longtemps après le talk. Les notes sont sur la page du talk : https://devfesttoulouse.fr/en/conferences/industrialiser-l-ia-en-equipe-des-skills-qui-encodent-vos-conventions
+
+La démo est en live et parle à tout le monde : le même prompt, sans puis avec nos skills, et la différence saute aux yeux. On parle aussi franchement des limites et des alternatives (npx skills, APM), et de ce qui reste à faire, comme les evals.
+
+Et la méthode ne dépend pas de Claude : les skills suivent le standard ouvert Agent Skills, lu par Cursor, Copilot, Codex ou Antigravity.
+```
+
+## Références (Conference Hall et formulaires qui ont ce champ)
+
+À Devoxx, pas de champ références : l'essentiel (Toulouse, la salle, les
+retours) est dans l'elevator pitch ci-dessus.
+
+```
+On a donné ce talk à deux avec Guillaume Leroy au DevFest Toulouse 2026, dans le grand amphi, devant une salle quasiment pleine. Les retours ont été très bons, et on a eu beaucoup d'échanges avec le public, pendant les questions et encore longtemps après le talk. Les notes sont sur la page du talk : https://devfesttoulouse.fr/en/conferences/industrialiser-l-ia-en-equipe-des-skills-qui-encodent-vos-conventions
+
+Avant ça, on l'avait présenté à Cloud Nord 2026. Le talk évolue à chaque fois : à Cloud Nord, quelqu'un nous a demandé ce qu'on pensait d'APM, l'outil de Microsoft. Honnêtement, on ne le connaissait pas. On a creusé après, et il a maintenant sa slide.
+
+Tout ce qu'on montre est réel et public :
+- pollen, l'outil open source qu'on a écrit pour installer et épingler les skills projet par projet : https://github.com/groupbees/pollen
+- notre catalogue de skills, celui de la démo : https://github.com/tosun-si/skills-core
+- skill-action, la GitHub Action qui valide nos modules de skills en CI : https://github.com/groupbees/skill-action
+
+Côté speakers, je suis GDE Cloud et Docker Captain, et je parle régulièrement en conférence et en meetup. Guillaume forme des étudiants à EPITECH et Polytech.
+```
+
+## Notes (« Any additional requirements, alternative session formats… »)
+
+```
+On présente à deux (Mazlum Tosun et Guillaume Leroy) : deux micros, idéalement des micros casque, car on alterne la parole et le clavier pendant la démo.
+
+La démo est en live depuis notre laptop : sortie HDMI ou USB-C, et un accès internet stable. On a un plan B (partage de connexion 4G et sorties de démo pré-enregistrées), donc une coupure réseau ne bloque pas le talk.
+
+Format visé : conférence de 45 minutes. Le talk peut aussi tenir en Tools-in-Action de 30 minutes, en gardant la démo et en resserrant la partie gouvernance.
+```

@@ -7,16 +7,18 @@ Titre : **Industrialiser l'IA en équipe : des skills qui encodent vos conventio
 Tous les champs sont en **texte brut** : pas de gras, pas de backticks, pas de
 tirets longs.
 
-## Elevator pitch (« Why should this talk be selected? »)
+## Elevator pitch (« Why should this talk be selected? », 1 000 caractères max)
+
+907 caractères.
 
 ```
-Ce talk est notre retour d'expérience chez GroupBees : comment on a industrialisé notre usage de l'IA en partageant nos conventions sous forme de skills, versionnés et relus comme du code. Et les outils qu'on a construits pour ça sont open source, comme pollen, qui installe et épingle les skills, projet par projet : https://github.com/groupbees/pollen
+Ce talk est notre retour d'expérience chez GroupBees : comment on a industrialisé notre usage de l'IA en partageant nos conventions sous forme de skills, versionnés et relus comme du code. Nos outils sont open source, comme pollen, qui installe et épingle les skills, projet par projet.
 
-Le talk a déjà fait ses preuves : au DevFest Toulouse 2026, on l'a donné dans le grand amphi devant une salle quasiment pleine, avec de très bons retours et beaucoup d'échanges avec le public, encore longtemps après le talk. Les notes sont sur la page du talk : https://devfesttoulouse.fr/en/conferences/industrialiser-l-ia-en-equipe-des-skills-qui-encodent-vos-conventions
+Il a fait ses preuves au DevFest Toulouse 2026 : grand amphi quasiment plein, très bons retours et beaucoup d'échanges avec le public, encore longtemps après le talk. Les notes : https://devfesttoulouse.fr/en/conferences/industrialiser-l-ia-en-equipe-des-skills-qui-encodent-vos-conventions
 
-La démo est en live et parle à tout le monde : le même prompt, sans puis avec nos skills, et la différence saute aux yeux. On parle aussi franchement des limites et des alternatives (npx skills, APM), et de ce qui reste à faire, comme les evals.
+La démo est en live : le même prompt, sans puis avec nos skills, et la différence saute aux yeux. On parle aussi franchement des alternatives (npx skills, APM) et de ce qui reste à faire, comme les evals.
 
-Et la méthode ne dépend pas de Claude : les skills suivent le standard ouvert Agent Skills, lu par Cursor, Copilot, Codex ou Antigravity.
+La méthode ne dépend pas de Claude : les skills suivent le standard ouvert Agent Skills, lu par Cursor, Copilot ou Codex.
 ```
 
 ## Références (Conference Hall et formulaires qui ont ce champ)

@@ -66,3 +66,18 @@ ingérable.
 
 Vous repartirez avec une méthodologie transposable à d'autres assistants (Cursor,
 Copilot) : passer du prompt qui marche au workflow qui scale.
+
+## Abstract — Devoxx France (1 200 caractères max)
+
+Version courte, alignée sur la démo réelle (SANS / AVEC, pas de déploiement
+en live). 1 005 caractères. Texte brut : pas de backticks ni de tirets longs.
+
+> Générer du code avec une IA, c'est devenu trivial. Le faire selon les conventions de votre équipe (architecture, Dockerfile, CI/CD, tests, PR), c'est une autre histoire. C'est là que le vibe coding individuel atteint ses limites.
+>
+> Chez GroupBees, on est passés d'un CLAUDE.md monolithique et ingérable à une bibliothèque de skills modulaires et partagés, basés sur le standard Agent Skills. Ils encodent nos pratiques : architecture hexagonale Python, Docker multi-stage, tests, Git, CI/CD et déploiement sur Cloud Run.
+>
+> En démo, on soumet la même demande à Claude Code, sans puis avec les skills, et on compare ce qui sort. Si le résultat change, ce n'est pas par magie : c'est parce que les règles sont là.
+>
+> Mais une bibliothèque de skills, ça se gouverne : revue, versioning, responsables, mise à jour des skills obsolètes. Sinon, on recrée le monolithe.
+>
+> Vous repartirez avec une méthode applicable à Claude Code, Cursor, Copilot et d'autres agents : passer du prompt qui marche au workflow qui scale.

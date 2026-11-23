@@ -10,7 +10,7 @@ tirets longs.
 ## Elevator pitch (« Why should this talk be selected? »)
 
 ```
-Ce talk est notre retour d'expérience chez GroupBees : comment on a industrialisé notre usage de l'IA en partageant nos conventions sous forme de skills, versionnés et relus comme du code. Et les outils qu'on a construits pour ça sont open source.
+Ce talk est notre retour d'expérience chez GroupBees : comment on a industrialisé notre usage de l'IA en partageant nos conventions sous forme de skills, versionnés et relus comme du code. Et les outils qu'on a construits pour ça sont open source, comme pollen, qui installe et épingle les skills, projet par projet : https://github.com/groupbees/pollen
 
 Le talk a déjà fait ses preuves : au DevFest Toulouse 2026, on l'a donné dans le grand amphi devant une salle quasiment pleine, avec de très bons retours et beaucoup d'échanges avec le public, encore longtemps après le talk. Les notes sont sur la page du talk : https://devfesttoulouse.fr/en/conferences/industrialiser-l-ia-en-equipe-des-skills-qui-encodent-vos-conventions
 
